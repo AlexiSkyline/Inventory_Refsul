@@ -37,7 +37,22 @@ public class SellerRepository implements CrudRepository<Seller>
     @Override
     public Seller findById( int id ) throws SQLException
     {
-        return null;
+        String sqlQuery = "SELECT * FROM seller_view WHERE Id_Seller = ?;";
+        Seller seller = null;
+
+        try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery) )
+        {
+            preparedStatement.setInt( 1, id );
+
+            try ( ResultSet resultSet = preparedStatement.executeQuery() )
+            {
+                if( resultSet.next() ) {
+                    seller = this.buildSeller( resultSet );
+                }
+            }
+        }
+
+        return seller;
     }
 
     @Override
