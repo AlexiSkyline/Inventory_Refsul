@@ -1,5 +1,6 @@
 package com.refsul.inventory_refsul.Repository;
 
+import com.refsul.inventory_refsul.Repository.Interfaces.CrudRepository;
 import com.refsul.inventory_refsul.models.Staff.Seller;
 
 import java.sql.*;
@@ -80,12 +81,12 @@ public class SellerRepository implements CrudRepository<Seller>
         seller.setUserName( resultSet.getString( 2 ) );
         seller.setPassword( resultSet.getString( 3 ) );
         seller.setIdInformation( resultSet.getInt( 4 ) );
-        seller.setNames( resultSet.getString( 5 ) );
+        seller.setName( resultSet.getString( 5 ) );
         seller.setLastName( resultSet.getString( 6 ) );
         seller.setRfc( resultSet.getString( 7 ) );
         seller.setAddress( resultSet.getString( 8 ) );
         seller.setEmail( resultSet.getString( 9 ) );
-        seller.setNumberPhone( resultSet.getString( 10 ) );
+        seller.setPhoneNumber( resultSet.getString( 10 ) );
         seller.setStatus( resultSet.getBoolean( 11 ) );
 
         return seller;

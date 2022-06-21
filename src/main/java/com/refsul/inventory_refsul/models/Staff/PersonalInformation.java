@@ -3,12 +3,12 @@ package com.refsul.inventory_refsul.models.Staff;
 public class PersonalInformation
 {
     protected int idInformation;
-    protected String names;
+    protected String name;
     protected String lastName;
     protected String rfc;
     protected String address;
     protected String email;
-    protected String numberPhone;
+    protected String phoneNumber;
     protected boolean status;
 
     public PersonalInformation() {}
@@ -22,13 +22,13 @@ public class PersonalInformation
         this.idInformation = idInformation;
     }
 
-    public String getNames() 
+    public String getName()
     {
-        return names;
+        return name;
     }
-    public void setNames( String names ) 
+    public void setName( String name )
     {
-        this.names = names;
+        this.name = name;
     }
 
     public String getLastName() {
@@ -65,12 +65,12 @@ public class PersonalInformation
         this.email = email;
     }
 
-    public String getNumberPhone() {
-        return numberPhone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
-    public void setNumberPhone( String numberPhone ) 
+    public void setPhoneNumber( String phoneNumber )
     {
-        this.numberPhone = numberPhone;
+        this.phoneNumber = phoneNumber;
     }
 
     public boolean getStatus() 

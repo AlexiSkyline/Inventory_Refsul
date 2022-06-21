@@ -1,4 +1,4 @@
-package com.refsul.inventory_refsul.Repository;
+package com.refsul.inventory_refsul.Repository.Interfaces;
 
 import java.sql.Connection;
 import java.sql.SQLException;
