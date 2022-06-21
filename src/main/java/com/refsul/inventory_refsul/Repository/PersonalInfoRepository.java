@@ -76,18 +76,47 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
     @Override
     public boolean update( PersonalInformation personalInformation ) throws SQLException
     {
-        return false;
+        String sqlQuery = "UPDATE personal_informations SET Name= ?, Last_Name= ?, RFC= ?, Address= ?, " +
+                "Email= ?, Phone_Number= ? WHERE Id = ?;";
+        try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
+        {
+            this.executePreparedStatement( preparedStatement, personalInformation );
+            return true;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean delete( int id ) throws SQLException
     {
-        return false;
+        String sqlQuery = "DELETE FROM personal_informations WHERE Id = ?;";
+        try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
+        {
+            preparedStatement.setInt( 1, id );
+            preparedStatement.executeUpdate();
+            return true;
+        } catch ( SQLException e )
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public int getLastId() throws SQLException
     {
+        String sqlQuery = "SELECT MAX(Id) FROM sellers;";
+        try( Statement statement = this.connection.createStatement();
+             ResultSet resultSet = statement.executeQuery( sqlQuery ); )
+        {
+            if( resultSet.next() )
+            {
+                return resultSet.getInt( 1 );
+            }
+        }
         return 0;
     }
 
