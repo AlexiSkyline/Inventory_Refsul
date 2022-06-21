@@ -26,7 +26,8 @@ public class SellerRepository implements CrudRepository<Seller>
         try ( Statement statement = this.connection.createStatement();
               ResultSet resultSet = statement.executeQuery( sqlQuery ); )
         {
-            while( resultSet.next() ) {
+            while( resultSet.next() )
+            {
                 Seller seller = this.buildSeller( resultSet );
                 sellers.add( seller );
             }
@@ -47,7 +48,8 @@ public class SellerRepository implements CrudRepository<Seller>
 
             try ( ResultSet resultSet = preparedStatement.executeQuery() )
             {
-                if( resultSet.next() ) {
+                if( resultSet.next() )
+                {
                     seller = this.buildSeller( resultSet );
                 }
             }
@@ -59,19 +61,47 @@ public class SellerRepository implements CrudRepository<Seller>
     @Override
     public boolean create( Seller seller )
     {
-        return false;
+        String sqlQuery = "INSERT INTO sellers ( User_Name, Password, Personal_Information_Id ) VALUES ( ?, ?, ? );";
+        try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ); )
+        {
+            this.executePreparedStatement( preparedStatement, seller );
+            return true;
+        }
+        catch ( SQLException e )
+        {
+            return false;
+        }
     }
 
     @Override
     public boolean update( Seller seller )
     {
-        return false;
+        String sqlQuery = "UPDATE sellers SET User_Name= ?, Password= ?, Personal_Information_Id= ? WHERE Id= ?;";
+        try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ); )
+        {
+            this.executePreparedStatement( preparedStatement, seller );
+            return true;
+        }
+        catch ( SQLException e )
+        {
+            return false;
+        }
     }
 
     @Override
     public boolean delete( int id )
     {
-        return false;
+        String sqlQuery = "DELETE FROM sellers WHERE Id= ?;";
+        try( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
+        {
+            preparedStatement.setInt( 1, id );
+            preparedStatement.executeUpdate();
+            return true;
+        }
+        catch ( SQLException e )
+        {
+            return false;
+        }
     }
 
     private Seller buildSeller( ResultSet resultSet ) throws SQLException
@@ -90,5 +120,17 @@ public class SellerRepository implements CrudRepository<Seller>
         seller.setStatus( resultSet.getBoolean( 11 ) );
 
         return seller;
+    }
+
+    private void executePreparedStatement( PreparedStatement preparedStatement, Seller seller ) throws SQLException
+    {
+        preparedStatement.setString( 1, seller.getUserName() );
+        preparedStatement.setString( 2, seller.getPassword() );
+        preparedStatement.setInt( 3, seller.getIdInformation() );
+        if( seller.getIdSeller() > 0 )
+        {
+            preparedStatement.setInt( 4, seller.getIdSeller() );
+        }
+        preparedStatement.executeUpdate();
     }
 }

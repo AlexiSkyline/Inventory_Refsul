@@ -48,7 +48,8 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
 
             try ( ResultSet resultSet = preparedStatement.executeQuery() )
             {
-                if( resultSet.next() ) {
+                if( resultSet.next() )
+                {
                     personalInformation = this.buildPersonalInformation( resultSet );
                 }
             }
@@ -58,7 +59,7 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
     }
 
     @Override
-    public boolean create( PersonalInformation personalInformation ) throws SQLException
+    public boolean create( PersonalInformation personalInformation )
     {
         String sqlQuery = "INSERT INTO personal_informations ( Name, Last_Name, RFC, Address, Email, " +
                 "Phone_Number ) VALUES ( ?, ?, ?, ?, ?, ? );";
@@ -66,15 +67,15 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
         {
             this.executePreparedStatement( preparedStatement, personalInformation );
             return true;
-        } catch ( SQLException e )
+        }
+        catch ( SQLException e )
         {
-            e.printStackTrace();
             return false;
         }
     }
 
     @Override
-    public boolean update( PersonalInformation personalInformation ) throws SQLException
+    public boolean update( PersonalInformation personalInformation )
     {
         String sqlQuery = "UPDATE personal_informations SET Name= ?, Last_Name= ?, RFC= ?, Address= ?, " +
                 "Email= ?, Phone_Number= ? WHERE Id = ?;";
@@ -82,15 +83,15 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
         {
             this.executePreparedStatement( preparedStatement, personalInformation );
             return true;
-        } catch ( SQLException e )
+        }
+        catch ( SQLException e )
         {
-            e.printStackTrace();
             return false;
         }
     }
 
     @Override
-    public boolean delete( int id ) throws SQLException
+    public boolean delete( int id )
     {
         String sqlQuery = "DELETE FROM personal_informations WHERE Id = ?;";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
@@ -98,9 +99,9 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
             preparedStatement.setInt( 1, id );
             preparedStatement.executeUpdate();
             return true;
-        } catch ( SQLException e )
+        }
+        catch ( SQLException e )
         {
-            e.printStackTrace();
             return false;
         }
     }
@@ -117,6 +118,7 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
                 return resultSet.getInt( 1 );
             }
         }
+
         return 0;
     }
 
