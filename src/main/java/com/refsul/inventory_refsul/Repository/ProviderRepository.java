@@ -39,7 +39,7 @@ public class ProviderRepository implements CrudRepository<Provider>
     @Override
     public Provider findById( int id ) throws SQLException
     {
-        String sqlQuery = "SELECT * FROM providers_view WHERE Id_Provider = ?";
+        String sqlQuery = "SELECT * FROM providers_view WHERE Id_Provider = ?;";
         Provider provider = null;
 
         try (PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
