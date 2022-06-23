@@ -1,4 +1,4 @@
-package com.refsul.inventory_refsul.Repository;
+package com.refsul.inventory_refsul.Repository.Implements.Staff;
 
 import com.refsul.inventory_refsul.Repository.Interfaces.CrudRepository;
 import com.refsul.inventory_refsul.models.Staff.Seller;
