@@ -1,10 +1,33 @@
 package com.refsul.inventory_refsul.View;
 
-public class Home extends javax.swing.JFrame {
+import com.refsul.inventory_refsul.View.InternalsFrame.Customer;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JInternalFrame;
+
+public class Home extends javax.swing.JFrame implements ActionListener {
     public Home() {
         initComponents();
         this.setExtendedState( MAXIMIZED_BOTH );
         this.setResizable( false );
+        this.ItemCustomers.addActionListener( this );
+    }
+
+    @Override
+    public void actionPerformed( ActionEvent e ) {
+        if( e.getActionCommand().contains("Clientes" ) ) {
+            Customer customer = new Customer();
+            this.showWindows( customer );
+        }
+    }
+    
+    public void showWindows(JInternalFrame child ) {
+        jDesktopPaneHome.add( child );
+        Dimension size = child.getSize();
+        Dimension dimension = jDesktopPaneHome.getSize();
+        child.setLocation(( dimension.width - size.width )/2, ( dimension.height - size.height ) / 2);
+        child.show();
     }
 
     /**

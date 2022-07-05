@@ -38,7 +38,6 @@
                   <Image iconType="3" name="/Images/customer-service.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="  Ayuda"/>
-                <Property name="actionCommand" type="java.lang.String" value="  Ayuda"/>
                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                   <Insets value="[10, 15, 10, 10]"/>
                 </Property>
