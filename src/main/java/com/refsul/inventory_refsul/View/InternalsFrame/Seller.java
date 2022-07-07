@@ -38,8 +38,8 @@ public class Seller extends javax.swing.JInternalFrame {
         btnClean = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        tableSeller = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane = new javax.swing.JScrollPane();
+        tableSeller = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -161,7 +161,7 @@ public class Seller extends javax.swing.JInternalFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(0, 250));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableSeller.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -169,9 +169,9 @@ public class Seller extends javax.swing.JInternalFrame {
                 "ID", "Nombre", "Apellidos", "RFC", "Dirección", "Email", "Teléfono", "Usuario"
             }
         ));
-        tableSeller.setViewportView(jTable1);
+        jScrollPane.setViewportView(tableSeller);
 
-        jPanel4.add(tableSeller, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 980, 270));
+        jPanel4.add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 980, 270));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header_Table_Seller.jpg"))); // NOI18N
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 360));
@@ -225,7 +225,7 @@ public class Seller extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane;
     public javax.swing.JLabel labelAddress;
     private javax.swing.JLabel labelEmail;
     public javax.swing.JLabel labelLastName;
@@ -233,7 +233,7 @@ public class Seller extends javax.swing.JInternalFrame {
     public javax.swing.JLabel labelPhoneNumber;
     public javax.swing.JLabel labelRFC;
     public javax.swing.JLabel labelUserName;
-    private javax.swing.JScrollPane tableSeller;
+    private javax.swing.JTable tableSeller;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLastName;

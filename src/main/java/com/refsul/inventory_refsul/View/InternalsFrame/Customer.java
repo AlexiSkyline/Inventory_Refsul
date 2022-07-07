@@ -36,8 +36,8 @@ public class Customer extends javax.swing.JInternalFrame {
         btnClean = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        tableCustomer = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane = new javax.swing.JScrollPane();
+        tableCustomer = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -150,7 +150,7 @@ public class Customer extends javax.swing.JInternalFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(0, 250));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -158,9 +158,9 @@ public class Customer extends javax.swing.JInternalFrame {
                 "ID", "Nombre", "Apellidos", "RFC", "Dirección", "Email", "Teléfono"
             }
         ));
-        tableCustomer.setViewportView(jTable1);
+        jScrollPane.setViewportView(tableCustomer);
 
-        jPanel4.add(tableCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 980, 270));
+        jPanel4.add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 980, 270));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header_Table.jpg"))); // NOI18N
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 360));
@@ -191,12 +191,12 @@ public class Customer extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
 
@@ -215,14 +215,14 @@ public class Customer extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane;
     public javax.swing.JLabel labelAddress;
     private javax.swing.JLabel labelEmail;
     public javax.swing.JLabel labelLastName;
     public javax.swing.JLabel labelName;
     public javax.swing.JLabel labelPhoneNumber;
     public javax.swing.JLabel labelRFC;
-    private javax.swing.JScrollPane tableCustomer;
+    private javax.swing.JTable tableCustomer;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLastName;

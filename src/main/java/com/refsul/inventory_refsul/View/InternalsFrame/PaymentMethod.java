@@ -1,7 +1,7 @@
 package com.refsul.inventory_refsul.View.InternalsFrame;
 
-public class Provider extends javax.swing.JInternalFrame {
-    public Provider() {
+public class PaymentMethod extends javax.swing.JInternalFrame {
+    public PaymentMethod() {
         initComponents();
     }
 
@@ -20,24 +20,14 @@ public class Provider extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         labelName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        labelLastName = new javax.swing.JLabel();
-        txtLastName = new javax.swing.JTextField();
-        labelRFC = new javax.swing.JLabel();
-        txtRFC = new javax.swing.JTextField();
-        labelAddress = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
-        labelEmail = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        labelPhoneNumber = new javax.swing.JLabel();
-        txtPhoneNumber = new javax.swing.JTextField();
-        btnAddProvider = new javax.swing.JButton();
-        btnUpdateProvider = new javax.swing.JButton();
-        btnDeleteProvider = new javax.swing.JButton();
+        btnAddPaymentMethod = new javax.swing.JButton();
+        btnUpdatePaymentMethod = new javax.swing.JButton();
+        btnDeletePaymentMethod = new javax.swing.JButton();
         btnClean = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane = new javax.swing.JScrollPane();
-        tableProvider = new javax.swing.JTable();
+        tablePaymentMethod = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -54,7 +44,7 @@ public class Provider extends javax.swing.JInternalFrame {
         jPanel2.setMinimumSize(new java.awt.Dimension(1000, 180));
         jPanel2.setPreferredSize(new java.awt.Dimension(600, 131));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header_Provider.jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header_PaymentMethod.jpg"))); // NOI18N
         jLabel5.setAlignmentY(0.0F);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -73,96 +63,49 @@ public class Provider extends javax.swing.JInternalFrame {
 
         labelName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelName.setForeground(new java.awt.Color(91, 90, 90));
-        labelName.setText("Nombres:");
+        labelName.setText("Descripción: ");
         labelName.setPreferredSize(new java.awt.Dimension(80, 25));
-        jPanel3.add(labelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel3.add(labelName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 130, -1));
 
         txtName.setPreferredSize(new java.awt.Dimension(240, 30));
-        jPanel3.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+        jPanel3.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 540, 40));
 
-        labelLastName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelLastName.setForeground(new java.awt.Color(91, 90, 90));
-        labelLastName.setText("Apellidos:");
-        labelLastName.setPreferredSize(new java.awt.Dimension(80, 25));
-        jPanel3.add(labelLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        btnAddPaymentMethod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add.png"))); // NOI18N
+        btnAddPaymentMethod.setText(" Agregar");
+        jPanel3.add(btnAddPaymentMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 140, 40));
 
-        txtLastName.setPreferredSize(new java.awt.Dimension(240, 30));
-        jPanel3.add(txtLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
+        btnUpdatePaymentMethod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update.png"))); // NOI18N
+        btnUpdatePaymentMethod.setText(" Actualizar");
+        jPanel3.add(btnUpdatePaymentMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 140, 40));
 
-        labelRFC.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelRFC.setForeground(new java.awt.Color(91, 90, 90));
-        labelRFC.setText("RFC:");
-        labelRFC.setPreferredSize(new java.awt.Dimension(80, 25));
-        jPanel3.add(labelRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 80, -1));
-
-        txtRFC.setPreferredSize(new java.awt.Dimension(240, 30));
-        jPanel3.add(txtRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
-
-        labelAddress.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelAddress.setForeground(new java.awt.Color(91, 90, 90));
-        labelAddress.setText("Dirección:");
-        labelAddress.setPreferredSize(new java.awt.Dimension(80, 25));
-        jPanel3.add(labelAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 80, -1));
-
-        txtAddress.setPreferredSize(new java.awt.Dimension(240, 30));
-        jPanel3.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
-
-        labelEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelEmail.setForeground(new java.awt.Color(91, 90, 90));
-        labelEmail.setText("Email:");
-        labelEmail.setPreferredSize(new java.awt.Dimension(80, 25));
-        jPanel3.add(labelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, -1, -1));
-
-        txtEmail.setPreferredSize(new java.awt.Dimension(240, 30));
-        jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
-
-        labelPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelPhoneNumber.setForeground(new java.awt.Color(91, 90, 90));
-        labelPhoneNumber.setText("Teléfono: ");
-        labelPhoneNumber.setMaximumSize(new java.awt.Dimension(80, 25));
-        labelPhoneNumber.setMinimumSize(new java.awt.Dimension(80, 25));
-        labelPhoneNumber.setPreferredSize(new java.awt.Dimension(80, 25));
-        jPanel3.add(labelPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 80, -1));
-
-        txtPhoneNumber.setPreferredSize(new java.awt.Dimension(240, 30));
-        jPanel3.add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
-
-        btnAddProvider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add.png"))); // NOI18N
-        btnAddProvider.setText(" Agregar");
-        jPanel3.add(btnAddProvider, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 140, 40));
-
-        btnUpdateProvider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update.png"))); // NOI18N
-        btnUpdateProvider.setText(" Actualizar");
-        jPanel3.add(btnUpdateProvider, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 140, 40));
-
-        btnDeleteProvider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete.png"))); // NOI18N
-        btnDeleteProvider.setText(" Eliminar");
-        jPanel3.add(btnDeleteProvider, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 140, 40));
+        btnDeletePaymentMethod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete.png"))); // NOI18N
+        btnDeletePaymentMethod.setText(" Eliminar");
+        jPanel3.add(btnDeletePaymentMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 140, 40));
 
         btnClean.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clean.png"))); // NOI18N
         btnClean.setText(" Limpiar");
-        jPanel3.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 240, 140, 40));
+        jPanel3.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, 140, 40));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header_Body_Customer.jpg"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header_Body_PaymentMethod.jpg"))); // NOI18N
         jLabel6.setAlignmentY(0.0F);
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1002, -1));
 
         jPanel4.setPreferredSize(new java.awt.Dimension(0, 250));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tableProvider.setModel(new javax.swing.table.DefaultTableModel(
+        tablePaymentMethod.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Apellidos", "RFC", "Dirección", "Email", "Teléfono"
+                "ID", "Descripción"
             }
         ));
-        jScrollPane.setViewportView(tableProvider);
+        jScrollPane.setViewportView(tablePaymentMethod);
 
         jPanel4.add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 980, 270));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header_Table_Provider.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Card_Header_Table_PaymentMethod.jpg"))); // NOI18N
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 360));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -204,10 +147,10 @@ public class Provider extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddProvider;
+    private javax.swing.JButton btnAddPaymentMethod;
     private javax.swing.JButton btnClean;
-    private javax.swing.JButton btnDeleteProvider;
-    private javax.swing.JButton btnUpdateProvider;
+    private javax.swing.JButton btnDeletePaymentMethod;
+    private javax.swing.JButton btnUpdatePaymentMethod;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -216,18 +159,8 @@ public class Provider extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane;
-    public javax.swing.JLabel labelAddress;
-    private javax.swing.JLabel labelEmail;
-    public javax.swing.JLabel labelLastName;
     public javax.swing.JLabel labelName;
-    public javax.swing.JLabel labelPhoneNumber;
-    public javax.swing.JLabel labelRFC;
-    private javax.swing.JTable tableProvider;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtLastName;
+    private javax.swing.JTable tablePaymentMethod;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhoneNumber;
-    private javax.swing.JTextField txtRFC;
     // End of variables declaration//GEN-END:variables
 }
