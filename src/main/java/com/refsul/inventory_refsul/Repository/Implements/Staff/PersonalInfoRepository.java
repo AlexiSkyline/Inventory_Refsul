@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.models.Staff.PersonalInformation;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PersonalInfoRepository implements PersonalInformationRepository<PersonalInformation>
 {
@@ -37,7 +38,7 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
     }
 
     @Override
-    public PersonalInformation findById( int id ) throws SQLException
+    public Optional<PersonalInformation> findById(int id ) throws SQLException
     {
         String sqlQuery = "SELECT * FROM personal_informations WHERE Id = ?;";
         PersonalInformation personalInformation = null;
@@ -55,7 +56,7 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
             }
         }
 
-        return personalInformation;
+        return Optional.ofNullable( personalInformation );
     }
 
     @Override

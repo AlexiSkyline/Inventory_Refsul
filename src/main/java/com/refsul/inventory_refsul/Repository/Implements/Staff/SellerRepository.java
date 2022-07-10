@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.models.Staff.Seller;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SellerRepository implements CrudRepository<Seller>
 {
@@ -37,7 +38,7 @@ public class SellerRepository implements CrudRepository<Seller>
     }
 
     @Override
-    public Seller findById( int id ) throws SQLException
+    public Optional<Seller> findById(int id ) throws SQLException
     {
         String sqlQuery = "SELECT * FROM seller_view WHERE Id_Seller = ?;";
         Seller seller = null;
@@ -55,7 +56,7 @@ public class SellerRepository implements CrudRepository<Seller>
             }
         }
 
-        return seller;
+        return Optional.ofNullable( seller );
     }
 
     @Override

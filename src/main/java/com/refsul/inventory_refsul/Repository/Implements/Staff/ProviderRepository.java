@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.models.Staff.Provider;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProviderRepository implements CrudRepository<Provider>
 {
@@ -37,7 +38,7 @@ public class ProviderRepository implements CrudRepository<Provider>
     }
 
     @Override
-    public Provider findById( int id ) throws SQLException
+    public Optional<Provider> findById(int id ) throws SQLException
     {
         String sqlQuery = "SELECT * FROM providers_view WHERE Id_Provider = ?;";
         Provider provider = null;
@@ -54,7 +55,7 @@ public class ProviderRepository implements CrudRepository<Provider>
             }
         }
 
-        return provider;
+        return Optional.ofNullable( provider );
     }
 
     @Override

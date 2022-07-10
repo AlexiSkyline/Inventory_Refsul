@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.models.Business.PaymentMethod;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class PaymentMethodRepository implements CrudRepository<PaymentMethod>
 {
@@ -37,7 +38,7 @@ public class PaymentMethodRepository implements CrudRepository<PaymentMethod>
     }
 
     @Override
-    public PaymentMethod findById( int id ) throws SQLException
+    public Optional<PaymentMethod> findById(int id ) throws SQLException
     {
         String sqlQuery = "SELECT * FROM payment_methods WHERE Id = ?;";
         PaymentMethod method = null;
@@ -54,7 +55,7 @@ public class PaymentMethodRepository implements CrudRepository<PaymentMethod>
             }
         }
 
-        return method;
+        return Optional.ofNullable( method );
     }
 
     @Override

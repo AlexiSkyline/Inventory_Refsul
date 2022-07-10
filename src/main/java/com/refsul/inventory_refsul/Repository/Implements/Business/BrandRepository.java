@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.models.Business.Brand;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class BrandRepository implements CrudRepository<Brand>
 {
@@ -36,7 +37,7 @@ public class BrandRepository implements CrudRepository<Brand>
     }
 
     @Override
-    public Brand findById( int id ) throws SQLException
+    public Optional<Brand> findById(int id ) throws SQLException
     {
         String sqlQuery = "SELECT * FROM brands WHERE Id = ?;";
         Brand brand = null;
@@ -53,7 +54,7 @@ public class BrandRepository implements CrudRepository<Brand>
             }
         }
 
-        return brand;
+        return Optional.ofNullable( brand );
     }
 
     @Override

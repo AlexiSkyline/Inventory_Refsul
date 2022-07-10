@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.models.Business.UnitMeasurement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UnitMeasurementRepository implements CrudRepository<UnitMeasurement>
 {
@@ -37,7 +38,7 @@ public class UnitMeasurementRepository implements CrudRepository<UnitMeasurement
     }
 
     @Override
-    public UnitMeasurement findById( int id ) throws SQLException
+    public Optional<UnitMeasurement> findById(int id ) throws SQLException
     {
         String sqlQuery = "SELECT * FROM units_measurements WHERE Id = ?;";
         UnitMeasurement unitMeasurement = null;
@@ -54,7 +55,7 @@ public class UnitMeasurementRepository implements CrudRepository<UnitMeasurement
             }
         }
 
-        return unitMeasurement;
+        return Optional.ofNullable( unitMeasurement );
     }
 
     @Override

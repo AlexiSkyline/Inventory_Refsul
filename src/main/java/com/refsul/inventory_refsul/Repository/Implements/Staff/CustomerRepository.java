@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.models.Staff.Customer;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerRepository implements CrudRepository<Customer>
 {
@@ -36,7 +37,7 @@ public class CustomerRepository implements CrudRepository<Customer>
     }
 
     @Override
-    public Customer findById(int id ) throws SQLException
+    public Optional<Customer> findById(int id ) throws SQLException
     {
         String sqlQuery = "SELECT * FROM customers_view WHERE Id_Custumer = ?;";
         Customer customer = null;
@@ -53,7 +54,7 @@ public class CustomerRepository implements CrudRepository<Customer>
             }
         }
 
-        return customer;
+        return Optional.ofNullable( customer );
     }
 
     @Override
