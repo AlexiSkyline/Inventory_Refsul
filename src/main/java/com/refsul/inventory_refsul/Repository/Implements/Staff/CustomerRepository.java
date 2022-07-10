@@ -58,23 +58,18 @@ public class CustomerRepository implements CrudRepository<Customer>
     }
 
     @Override
-    public boolean create( Customer customer )
+    public void create( Customer customer ) throws SQLException
     {
         String sqlQuery = "INSERT INTO customers ( Personal_Information_Id ) VALUES ( ? );";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             preparedStatement.setInt( 1, customer.getIdInformation() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 
     @Override
-    public boolean update( Customer customer )
+    public void update( Customer customer ) throws SQLException
     {
         String sqlQuery = "UPDATE customers SET Personal_Information_Id = ? WHERE Id = ?";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
@@ -82,11 +77,6 @@ public class CustomerRepository implements CrudRepository<Customer>
             preparedStatement.setInt( 1, customer.getIdInformation() );
             preparedStatement.setInt( 2, customer.getIdCustomer() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

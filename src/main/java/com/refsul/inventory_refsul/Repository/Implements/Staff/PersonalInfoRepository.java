@@ -60,34 +60,24 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
     }
 
     @Override
-    public boolean create( PersonalInformation personalInformation )
+    public void create( PersonalInformation personalInformation ) throws SQLException
     {
         String sqlQuery = "INSERT INTO personal_informations ( Name, Last_Name, RFC, Address, Email, " +
                 "Phone_Number ) VALUES ( ?, ?, ?, ?, ?, ? );";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             this.executePreparedStatement( preparedStatement, personalInformation );
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 
     @Override
-    public boolean update( PersonalInformation personalInformation )
+    public void update( PersonalInformation personalInformation ) throws SQLException
     {
         String sqlQuery = "UPDATE personal_informations SET Name= ?, Last_Name= ?, RFC= ?, Address= ?, " +
                 "Email= ?, Phone_Number= ? WHERE Id = ?;";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             this.executePreparedStatement( preparedStatement, personalInformation );
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

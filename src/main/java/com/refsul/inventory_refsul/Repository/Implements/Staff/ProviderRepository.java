@@ -59,23 +59,18 @@ public class ProviderRepository implements CrudRepository<Provider>
     }
 
     @Override
-    public boolean create( Provider provider )
+    public void create( Provider provider ) throws SQLException
     {
         String sqlQuery = "INSERT INTO providers ( Personal_Information_Id ) VALUES ( ? );";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             preparedStatement.setInt( 1, provider.getIdInformation() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 
     @Override
-    public boolean update( Provider provider )
+    public void update( Provider provider ) throws SQLException
     {
         String sqlQuery = "UPDATE providers SET Personal_Information_Id = ? WHERE Id = ?;";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
@@ -83,11 +78,6 @@ public class ProviderRepository implements CrudRepository<Provider>
             preparedStatement.setInt( 1, provider.getIdInformation() );
             preparedStatement.setInt( 2, provider.getIdProvider() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

@@ -59,23 +59,18 @@ public class PaymentMethodRepository implements CrudRepository<PaymentMethod>
     }
 
     @Override
-    public boolean create( PaymentMethod paymentMethod )
+    public void create( PaymentMethod paymentMethod ) throws SQLException
     {
         String sqlQuery = "INSERT INTO payment_methods ( Description ) VALUES ( ? )";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             preparedStatement.setString( 1, paymentMethod.getDescription() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 
     @Override
-    public boolean update( PaymentMethod paymentMethod )
+    public void update( PaymentMethod paymentMethod ) throws SQLException
     {
         String sqlQuery = "UPDATE payment_methods SET Description = ? WHERE Id = ?;";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
@@ -83,11 +78,6 @@ public class PaymentMethodRepository implements CrudRepository<PaymentMethod>
             preparedStatement.setString( 1, paymentMethod.getDescription() );
             preparedStatement.setInt( 2, paymentMethod.getIdPaymentMethod() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

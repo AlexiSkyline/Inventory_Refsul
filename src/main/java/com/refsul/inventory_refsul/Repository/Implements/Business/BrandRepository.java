@@ -58,23 +58,18 @@ public class BrandRepository implements CrudRepository<Brand>
     }
 
     @Override
-    public boolean create( Brand brand )
+    public void create( Brand brand ) throws SQLException
     {
         String sqlQuery = "INSERT INTO brands ( Description ) VALUES (?);";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery )  )
         {
             preparedStatement.setString( 1, brand.getDescription() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 
     @Override
-    public boolean update( Brand brand )
+    public void update( Brand brand ) throws SQLException
     {
         String sqlQuery = "UPDATE brands SET Description = ? WHERE Id = ?";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
@@ -82,11 +77,6 @@ public class BrandRepository implements CrudRepository<Brand>
             preparedStatement.setString( 1, brand.getDescription() );
             preparedStatement.setInt( 2, brand.getIdBrand() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

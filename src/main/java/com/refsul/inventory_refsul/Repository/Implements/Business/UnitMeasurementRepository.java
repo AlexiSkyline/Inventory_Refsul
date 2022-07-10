@@ -59,23 +59,18 @@ public class UnitMeasurementRepository implements CrudRepository<UnitMeasurement
     }
 
     @Override
-    public boolean create( UnitMeasurement unitMeasurement )
+    public void create( UnitMeasurement unitMeasurement ) throws SQLException
     {
         String sqlQuery = "INSERT INTO units_measurements ( Description ) VALUES ( ? );";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             preparedStatement.setString( 1, unitMeasurement.getDescription() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 
     @Override
-    public boolean update( UnitMeasurement unitMeasurement )
+    public void update( UnitMeasurement unitMeasurement ) throws SQLException
     {
         String sqlQuery = "UPDATE units_measurements SET Description = ? WHERE Id = ?;";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
@@ -83,11 +78,6 @@ public class UnitMeasurementRepository implements CrudRepository<UnitMeasurement
             preparedStatement.setString( 1, unitMeasurement.getDescription() );
             preparedStatement.setInt( 2, unitMeasurement.getIdUnitMeasurement() );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

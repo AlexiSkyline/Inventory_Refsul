@@ -60,32 +60,22 @@ public class SellerRepository implements CrudRepository<Seller>
     }
 
     @Override
-    public boolean create( Seller seller )
+    public void create( Seller seller ) throws SQLException
     {
         String sqlQuery = "INSERT INTO sellers ( User_Name, Password, Personal_Information_Id ) VALUES ( ?, ?, ? );";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ); )
         {
             this.executePreparedStatement( preparedStatement, seller );
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 
     @Override
-    public boolean update( Seller seller )
+    public void update( Seller seller ) throws SQLException
     {
         String sqlQuery = "UPDATE sellers SET User_Name= ?, Password= ?, Personal_Information_Id= ? WHERE Id= ?;";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ); )
         {
             this.executePreparedStatement( preparedStatement, seller );
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

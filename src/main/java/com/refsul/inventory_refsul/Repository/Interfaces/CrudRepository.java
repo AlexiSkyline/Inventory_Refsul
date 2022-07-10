@@ -10,7 +10,7 @@ public interface CrudRepository<T>
      void setConnection( Connection connection );
      List<T> findAll() throws SQLException;
      Optional<T> findById(int id ) throws SQLException;
-     boolean create( T t );
-     boolean update( T t );
+     void create( T t ) throws SQLException;
+     void update( T t ) throws SQLException;
      void delete( int id ) throws SQLException;
 }
