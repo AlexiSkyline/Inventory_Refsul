@@ -2,16 +2,16 @@ package com.refsul.inventory_refsul.models.Business;
 
 public class Brand
 {
-    private int idBrand;
+    private Integer idBrand;
     private String description;
     private boolean status;
 
-    public int getIdBrand()
+    public Integer getIdBrand()
     {
         return idBrand;
     }
 
-    public void setIdBrand( int idBrand )
+    public void setIdBrand( Integer idBrand )
     {
         this.idBrand = idBrand;
     }

@@ -2,15 +2,15 @@ package com.refsul.inventory_refsul.models.Staff;
 
 public class Customer extends PersonalInformation
 {
-    private int idCustomer;
+    private Integer idCustomer;
 
     public Customer() {}
 
-    public int getIdCustomer()
+    public Integer getIdCustomer()
     {
         return idCustomer;
     }
-    public void setIdCustomer( int idCustomer )
+    public void setIdCustomer( Integer idCustomer )
     {
         this.idCustomer = idCustomer;
     }

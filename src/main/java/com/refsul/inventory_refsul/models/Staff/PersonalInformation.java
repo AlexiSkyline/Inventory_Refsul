@@ -2,7 +2,7 @@ package com.refsul.inventory_refsul.models.Staff;
 
 public class PersonalInformation
 {
-    protected int idInformation;
+    protected Integer idInformation;
     protected String name;
     protected String lastName;
     protected String rfc;
@@ -13,11 +13,11 @@ public class PersonalInformation
 
     public PersonalInformation() {}
 
-    public int getIdInformation() 
+    public Integer getIdInformation() 
     {
         return idInformation;
     }
-    public void setIdInformation( int idInformation ) 
+    public void setIdInformation( Integer idInformation ) 
     {
         this.idInformation = idInformation;
     }

@@ -4,18 +4,18 @@ import java.util.Date;
 
 public class Sale
 {
-    private int idSale;
+    private Integer idSale;
     private Date date;
     private String folio;
     private double total;
     private boolean status;
-    private int idSeller;
-    private int idCustomer;
-    private int idPaymentMethod;
+    private Integer idSeller;
+    private Integer idCustomer;
+    private Integer idPaymentMethod;
 
     public Sale() {}
 
-    public Sale( int idSale, Date date, String folio, double total, boolean status, int idSeller, int idCustomer, int idPaymentMethod )
+    public Sale( Integer idSale, Date date, String folio, double total, boolean status, Integer idSeller, Integer idCustomer, Integer idPaymentMethod )
     {
         this.idSale = idSale;
         this.date = date;
@@ -27,12 +27,12 @@ public class Sale
         this.idPaymentMethod = idPaymentMethod;
     }
 
-    public int getIdSale()
+    public Integer getIdSale()
     {
         return idSale;
     }
 
-    public void setIdSale( int idSale )
+    public void setIdSale( Integer idSale )
     {
         this.idSale = idSale;
     }
@@ -77,32 +77,32 @@ public class Sale
         this.status = status;
     }
 
-    public int getIdSeller()
+    public Integer getIdSeller()
     {
         return idSeller;
     }
 
-    public void setIdSeller( int idSeller )
+    public void setIdSeller( Integer idSeller )
     {
         this.idSeller = idSeller;
     }
 
-    public int getIdCustomer()
+    public Integer getIdCustomer()
     {
         return idCustomer;
     }
 
-    public void setIdCustomer( int idCustomer )
+    public void setIdCustomer( Integer idCustomer )
     {
         this.idCustomer = idCustomer;
     }
 
-    public int getIdPaymentMethod()
+    public Integer getIdPaymentMethod()
     {
         return idPaymentMethod;
     }
 
-    public void setIdPaymentMethod( int idPaymentMethod )
+    public void setIdPaymentMethod( Integer idPaymentMethod )
     {
         this.idPaymentMethod = idPaymentMethod;
     }

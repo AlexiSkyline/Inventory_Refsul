@@ -91,18 +91,13 @@ public class UnitMeasurementRepository implements CrudRepository<UnitMeasurement
     }
 
     @Override
-    public boolean delete( int id )
+    public void delete( int id ) throws SQLException
     {
         String sqlQuery = "DELETE FROM units_measurements WHERE Id = ?;";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             preparedStatement.setInt( 1, id );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

@@ -2,17 +2,17 @@ package com.refsul.inventory_refsul.models.Staff;
 
 public class Seller extends PersonalInformation
 {
-    private int idSeller;
+    private Integer idSeller;
     private String userName;
     private String password;
 
     public Seller() {}
 
-    public int getIdSeller() 
+    public Integer getIdSeller() 
     {
         return idSeller;
     }
-    public void setIdSeller( int idSeller ) 
+    public void setIdSeller( Integer idSeller ) 
     {
         this.idSeller = idSeller;
     }

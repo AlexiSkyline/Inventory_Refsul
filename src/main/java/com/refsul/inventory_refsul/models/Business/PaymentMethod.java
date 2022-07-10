@@ -2,16 +2,16 @@ package com.refsul.inventory_refsul.models.Business;
 
 public class PaymentMethod
 {
-    private int idPaymentMethod;
+    private Integer idPaymentMethod;
     private String description;
     private boolean status;
 
-    public int getIdPaymentMethod()
+    public Integer getIdPaymentMethod()
     {
         return idPaymentMethod;
     }
 
-    public void setIdPaymentMethod( int idPaymentMethod )
+    public void setIdPaymentMethod( Integer idPaymentMethod )
     {
         this.idPaymentMethod = idPaymentMethod;
     }

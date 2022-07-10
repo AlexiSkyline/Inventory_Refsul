@@ -11,5 +11,5 @@ public interface CrudRepository<T>
      T findById( int id ) throws SQLException;
      boolean create( T t );
      boolean update( T t );
-     boolean delete( int id );
+     void delete( int id ) throws SQLException;
 }

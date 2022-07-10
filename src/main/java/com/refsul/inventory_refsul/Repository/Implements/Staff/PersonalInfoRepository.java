@@ -91,18 +91,13 @@ public class PersonalInfoRepository implements PersonalInformationRepository<Per
     }
 
     @Override
-    public boolean delete( int id )
+    public void delete( int id ) throws SQLException
     {
         String sqlQuery = "DELETE FROM personal_informations WHERE Id = ?;";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             preparedStatement.setInt( 1, id );
             preparedStatement.executeUpdate();
-            return true;
-        }
-        catch ( SQLException e )
-        {
-            return false;
         }
     }
 

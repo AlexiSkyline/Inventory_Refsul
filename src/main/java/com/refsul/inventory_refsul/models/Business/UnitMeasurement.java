@@ -2,16 +2,16 @@ package com.refsul.inventory_refsul.models.Business;
 
 public class UnitMeasurement
 {
-    private int idUnitMeasurement;
+    private Integer idUnitMeasurement;
     private String description;
     private boolean status;
 
-    public int getIdUnitMeasurement()
+    public Integer getIdUnitMeasurement()
     {
         return idUnitMeasurement;
     }
 
-    public void setIdUnitMeasurement( int idUnitMeasurement )
+    public void setIdUnitMeasurement( Integer idUnitMeasurement )
     {
         this.idUnitMeasurement = idUnitMeasurement;
     }
