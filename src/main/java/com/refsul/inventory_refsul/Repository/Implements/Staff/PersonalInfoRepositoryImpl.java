@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PersonalInfoRepository implements PersonalInformationRepository<PersonalInformation>
+public class PersonalInfoRepositoryImpl implements PersonalInformationRepository<PersonalInformation>
 {
     private Connection connection;
 

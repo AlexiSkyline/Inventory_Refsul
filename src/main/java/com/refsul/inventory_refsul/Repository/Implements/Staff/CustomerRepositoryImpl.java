@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-public class CustomerRepository implements CrudRepository<Customer>
+public class CustomerRepositoryImpl implements CrudRepository<Customer>
 {
     private Connection connection;
 
