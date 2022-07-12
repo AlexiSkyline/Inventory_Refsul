@@ -1,6 +1,6 @@
 package com.refsul.inventory_refsul.Repository.Implements.Staff;
 
-import com.refsul.inventory_refsul.Repository.Interfaces.CrudRepository;
+import com.refsul.inventory_refsul.Repository.Interfaces.SellerRepository;
 import com.refsul.inventory_refsul.models.Staff.Seller;
 
 import java.sql.*;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class SellerRepository implements CrudRepository<Seller>
+public class SellerRepositoryImpl implements SellerRepository<Seller>
 {
     private Connection connection;
 
@@ -16,6 +16,29 @@ public class SellerRepository implements CrudRepository<Seller>
     public void setConnection( Connection connection )
     {
         this.connection = connection;
+    }
+
+    @Override
+    public Optional<Seller> login( String userName, String password ) throws SQLException
+    {
+        String sqlQuery = "SELECT * FROM sellers WHERE User_Name = ? AND Password = ?;";
+        Seller seller = null;
+
+        try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
+        {
+            preparedStatement.setString( 1, userName );
+            preparedStatement.setString( 2, password );
+
+            try ( ResultSet resultSet = preparedStatement.executeQuery() )
+            {
+                if( resultSet.next() )
+                {
+                    seller = this.buildSeller( resultSet );
+                }
+            }
+        }
+
+        return Optional.ofNullable( seller );
     }
 
     @Override

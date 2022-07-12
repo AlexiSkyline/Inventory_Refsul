@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UnitMeasurementRepository implements CrudRepository<UnitMeasurement>
+public class UnitMeasurementRepositoryImpl implements CrudRepository<UnitMeasurement>
 {
     private Connection connection;
 

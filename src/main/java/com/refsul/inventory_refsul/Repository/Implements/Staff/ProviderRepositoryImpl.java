@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ProviderRepository implements CrudRepository<Provider>
+public class ProviderRepositoryImpl implements CrudRepository<Provider>
 {
     private Connection connection;
 
