@@ -1,19 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.refsul.inventory_refsul.view.internalsFrame;
 
-/**
- *
- * @author Alexis
- */
 public class UISelller extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form UISelller
-     */
     public UISelller() {
         initComponents();
         this.setResizable( false );
@@ -120,9 +107,7 @@ public class UISelller extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel14)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jTextUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
@@ -137,15 +122,13 @@ public class UISelller extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jTextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jTextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextLasName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(jTextLasName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -192,9 +175,9 @@ public class UISelller extends javax.swing.JInternalFrame {
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(12, 12, 12)
@@ -263,11 +246,6 @@ public class UISelller extends javax.swing.JInternalFrame {
                 "Id", "Nombre", "Apellidos", "RFC", "Dirección", "Email", "Telefono", "Usuario"
             }
         ));
-        tableSeller.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableSellerMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tableSeller);
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -332,16 +310,12 @@ public class UISelller extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tableSellerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSellerMouseClicked
-
-    }//GEN-LAST:event_tableSellerMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JButton buttonAdd;
-    javax.swing.JButton buttonClearInput;
-    javax.swing.JButton buttonDelete;
-    javax.swing.JButton buttonUpdate;
+    private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonClearInput;
+    private javax.swing.JButton buttonDelete;
+    private javax.swing.JButton buttonUpdate;
     javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel10;
     javax.swing.JLabel jLabel11;
@@ -362,13 +336,13 @@ public class UISelller extends javax.swing.JInternalFrame {
     javax.swing.JPanel jPanel2;
     javax.swing.JPanel jPanel3;
     javax.swing.JScrollPane jScrollPane1;
-    javax.swing.JTextField jTextAddress;
-    javax.swing.JTextField jTextEmail;
-    javax.swing.JTextField jTextLasName;
-    javax.swing.JTextField jTextName;
-    javax.swing.JTextField jTextPhone;
-    javax.swing.JTextField jTextRFC;
-    javax.swing.JTextField jTextUserName;
-    public javax.swing.JTable tableSeller;
+    private javax.swing.JTextField jTextAddress;
+    private javax.swing.JTextField jTextEmail;
+    private javax.swing.JTextField jTextLasName;
+    private javax.swing.JTextField jTextName;
+    private javax.swing.JTextField jTextPhone;
+    private javax.swing.JTextField jTextRFC;
+    private javax.swing.JTextField jTextUserName;
+    private javax.swing.JTable tableSeller;
     // End of variables declaration//GEN-END:variables
 }
