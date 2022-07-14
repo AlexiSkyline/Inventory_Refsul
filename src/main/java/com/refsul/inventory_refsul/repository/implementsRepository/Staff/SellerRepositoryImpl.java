@@ -1,5 +1,6 @@
 package com.refsul.inventory_refsul.repository.implementsRepository.Staff;
 
+import com.refsul.inventory_refsul.models.staff.PersonalInformation;
 import com.refsul.inventory_refsul.repository.interfaces.SellerRepository;
 import com.refsul.inventory_refsul.models.staff.Seller;
 
@@ -120,14 +121,18 @@ public class SellerRepositoryImpl implements SellerRepository<Seller>
         seller.setIdSeller( resultSet.getInt( 1 ) );
         seller.setUserName( resultSet.getString( 2 ) );
         seller.setPassword( resultSet.getString( 3 ) );
-        seller.setIdInformation( resultSet.getInt( 4 ) );
-        seller.setName( resultSet.getString( 5 ) );
-        seller.setLastName( resultSet.getString( 6 ) );
-        seller.setRfc( resultSet.getString( 7 ) );
-        seller.setAddress( resultSet.getString( 8 ) );
-        seller.setEmail( resultSet.getString( 9 ) );
-        seller.setPhoneNumber( resultSet.getString( 10 ) );
-        seller.setStatus( resultSet.getBoolean( 11 ) );
+
+        PersonalInformation personalInformation = new PersonalInformation();
+        personalInformation.setIdInformation( resultSet.getInt( 4 ) );
+        personalInformation.setName( resultSet.getString( 5 ) );
+        personalInformation.setLastName( resultSet.getString( 6 ) );
+        personalInformation.setRfc( resultSet.getString( 7 ) );
+        personalInformation.setAddress( resultSet.getString( 8 ) );
+        personalInformation.setEmail( resultSet.getString( 9 ) );
+        personalInformation.setPhoneNumber( resultSet.getString( 10 ) );
+        personalInformation.setStatus( resultSet.getBoolean( 11 ) );
+
+        seller.setPersonalInformation( personalInformation );
 
         return seller;
     }
@@ -136,8 +141,8 @@ public class SellerRepositoryImpl implements SellerRepository<Seller>
     {
         preparedStatement.setString( 1, seller.getUserName() );
         preparedStatement.setString( 2, seller.getPassword() );
-        preparedStatement.setInt( 3, seller.getIdInformation() );
-        if( seller.getIdSeller() > 0 )
+        preparedStatement.setInt( 3, seller.getPersonalInformation().getIdInformation() );
+        if( seller.getIdSeller() != null && seller.getIdSeller() > 0 )
         {
             preparedStatement.setInt( 4, seller.getIdSeller() );
         }

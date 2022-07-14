@@ -95,7 +95,7 @@ public class PersonalInfoRepositoryImpl implements PersonalInformationRepository
     @Override
     public int getLastId() throws SQLException
     {
-        String sqlQuery = "SELECT MAX(Id) FROM sellers;";
+        String sqlQuery = "SELECT MAX(Id) FROM personal_informations;";
         try( Statement statement = this.connection.createStatement();
              ResultSet resultSet = statement.executeQuery( sqlQuery ); )
         {
@@ -131,7 +131,7 @@ public class PersonalInfoRepositoryImpl implements PersonalInformationRepository
         preparedStatement.setString( 4, personalInformation.getAddress() );
         preparedStatement.setString( 5, personalInformation.getEmail() );
         preparedStatement.setString( 6, personalInformation.getPhoneNumber() );
-        if( personalInformation.getIdInformation() > 0 )
+        if( personalInformation.getIdInformation() != null && personalInformation.getIdInformation() > 0 )
         {
             preparedStatement.setInt( 7, personalInformation.getIdInformation() );
         }

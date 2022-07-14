@@ -2,6 +2,7 @@ package com.refsul.inventory_refsul.view;
 
 import com.refsul.inventory_refsul.view.internalsFrame.UISelller;
 import java.awt.Dimension;
+import java.sql.SQLException;
 import javax.swing.JInternalFrame;
 
 public class Home extends javax.swing.JFrame {
@@ -128,7 +129,11 @@ public class Home extends javax.swing.JFrame {
         ItemSellers.setPreferredSize(new java.awt.Dimension(200, 50));
         ItemSellers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ItemSellersActionPerformed(evt);
+                try {
+                    ItemSellersActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         optionStaff.add(ItemSellers);
@@ -218,8 +223,7 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ItemSellersActionPerformed( java.awt.event.ActionEvent evt )
-    {
+    private void ItemSellersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException {
         UISelller seller = new UISelller();
         this.showWindows( seller );
     }
