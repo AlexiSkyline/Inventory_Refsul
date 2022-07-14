@@ -13,6 +13,8 @@ public class Login extends javax.swing.JFrame {
         this.setResizable( false );
 
         this.sellerController = new SellerController();
+        this.jTextUserName.setText( "AlexiSkyline" );
+        this.jTextPassword.setText( "123456" );
     }
 
     /**
@@ -134,7 +136,6 @@ public class Login extends javax.swing.JFrame {
 
     private void jButtonLoginActionPerformed( java.awt.event.ActionEvent evt )
     {
-        // TODO add your handling code here:
         String userName = jTextUserName.getText();
         String password = jTextPassword.getText();
 
