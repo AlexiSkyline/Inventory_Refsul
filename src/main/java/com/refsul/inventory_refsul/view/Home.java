@@ -1,5 +1,6 @@
 package com.refsul.inventory_refsul.view;
 
+import com.refsul.inventory_refsul.view.internalsFrame.UISelller;
 import java.awt.Dimension;
 import javax.swing.JInternalFrame;
 
@@ -125,6 +126,11 @@ public class Home extends javax.swing.JFrame {
         ItemSellers.setText("  Vendedores");
         ItemSellers.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemSellers.setPreferredSize(new java.awt.Dimension(200, 50));
+        ItemSellers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemSellersActionPerformed(evt);
+            }
+        });
         optionStaff.add(ItemSellers);
         optionStaff.add(jSeparator4);
 
@@ -134,6 +140,11 @@ public class Home extends javax.swing.JFrame {
         ItemProviders.setToolTipText("");
         ItemProviders.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemProviders.setPreferredSize(new java.awt.Dimension(200, 50));
+        ItemProviders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemProvidersActionPerformed(evt);
+            }
+        });
         optionStaff.add(ItemProviders);
         optionStaff.add(jSeparator3);
 
@@ -143,6 +154,11 @@ public class Home extends javax.swing.JFrame {
         ItemCustomers.setToolTipText("");
         ItemCustomers.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemCustomers.setPreferredSize(new java.awt.Dimension(200, 50));
+        ItemCustomers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemCustomersActionPerformed(evt);
+            }
+        });
         optionStaff.add(ItemCustomers);
 
         navBar.add(optionStaff);
@@ -202,7 +218,25 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private void ItemSellersActionPerformed( java.awt.event.ActionEvent evt )
+    {
+        UISelller seller = new UISelller();
+        this.showWindows( seller );
+    }
+
+    private void ItemProvidersActionPerformed( java.awt.event.ActionEvent evt )
+    {
+//        Provider provider = new Provider();
+//        this.showWindows( provider );
+    }
+
+    private void ItemCustomersActionPerformed( java.awt.event.ActionEvent evt )
+    {
+        // TODO add your handling code here:
+//        Customer customer = new Customer();
+//        this.showWindows( customer );
+    }
+
     private javax.swing.JMenuItem ItemBrands;
     private javax.swing.JMenuItem ItemClose;
     private javax.swing.JMenuItem ItemCustomers;
@@ -227,5 +261,4 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu optionMenu;
     private javax.swing.JMenu optionSales;
     private javax.swing.JMenu optionStaff;
-    // End of variables declaration//GEN-END:variables
 }
