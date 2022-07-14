@@ -2,14 +2,14 @@ package com.refsul.inventory_refsul.models.staff;
 
 public class PersonalInformation
 {
-    protected Integer idInformation;
-    protected String name;
-    protected String lastName;
-    protected String rfc;
-    protected String address;
-    protected String email;
-    protected String phoneNumber;
-    protected boolean status;
+    private Integer idInformation;
+    private String name;
+    private String lastName;
+    private String rfc;
+    private String address;
+    private String email;
+    private String phoneNumber;
+    private boolean status;
 
     public PersonalInformation() {}
 

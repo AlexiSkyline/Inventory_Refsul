@@ -1,5 +1,6 @@
 package com.refsul.inventory_refsul.repository.implementsRepository.Staff;
 
+import com.refsul.inventory_refsul.models.staff.PersonalInformation;
 import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.models.staff.Customer;
 
@@ -63,7 +64,7 @@ public class CustomerRepositoryImpl implements CrudRepository<Customer>
         String sqlQuery = "INSERT INTO customers ( Personal_Information_Id ) VALUES ( ? );";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
-            preparedStatement.setInt( 1, customer.getIdInformation() );
+            preparedStatement.setInt( 1, customer.getPersonalInformation().getIdInformation() );
             preparedStatement.executeUpdate();
         }
     }
@@ -74,7 +75,7 @@ public class CustomerRepositoryImpl implements CrudRepository<Customer>
         String sqlQuery = "UPDATE customers SET Personal_Information_Id = ? WHERE Id = ?";
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
-            preparedStatement.setInt( 1, customer.getIdInformation() );
+            preparedStatement.setInt( 1, customer.getPersonalInformation().getIdInformation() );
             preparedStatement.setInt( 2, customer.getIdCustomer() );
             preparedStatement.executeUpdate();
         }
@@ -95,14 +96,18 @@ public class CustomerRepositoryImpl implements CrudRepository<Customer>
     {
         Customer customer = new Customer();
         customer.setIdCustomer( resultSet.getInt( 1 ) );
-        customer.setIdInformation( resultSet.getInt( 2 ) );
-        customer.setName( resultSet.getString( 3 ) );
-        customer.setLastName( resultSet.getString( 4 ) );
-        customer.setRfc( resultSet.getString( 5 ) );
-        customer.setAddress( resultSet.getString( 6 ) );
-        customer.setEmail( resultSet.getString( 7 ) );
-        customer.setPhoneNumber( resultSet.getString( 8 ) );
-        customer.setStatus( resultSet.getBoolean( 9 ) );
+
+        PersonalInformation personalInformation = new PersonalInformation();
+        personalInformation.setIdInformation( resultSet.getInt( 2 ) );
+        personalInformation.setName( resultSet.getString( 3 ) );
+        personalInformation.setLastName( resultSet.getString( 4 ) );
+        personalInformation.setRfc( resultSet.getString( 5 ) );
+        personalInformation.setAddress( resultSet.getString( 6 ) );
+        personalInformation.setEmail( resultSet.getString( 7 ) );
+        personalInformation.setPhoneNumber( resultSet.getString( 8 ) );
+        personalInformation.setStatus( resultSet.getBoolean( 9 ) );
+
+        customer.setPersonalInformation( personalInformation );
 
         return customer;
     }

@@ -1,9 +1,35 @@
 package com.refsul.inventory_refsul.view.internalsFrame;
 
+import com.refsul.inventory_refsul.controllers.SellerController;
+import com.refsul.inventory_refsul.models.staff.PersonalInformation;
+import com.refsul.inventory_refsul.models.staff.Seller;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.SQLException;
+import java.util.List;
+
 public class UISelller extends javax.swing.JInternalFrame {
-    public UISelller() {
+    SellerController sellerController;
+    DefaultTableModel tableModel;
+    Seller seller;
+    PersonalInformation personalInformation;
+    private int idSeller;
+
+    public UISelller() throws SQLException {
         initComponents();
         this.setResizable( false );
+
+        this.sellerController = new SellerController();
+        this.tableModel = new DefaultTableModel();
+        this.seller = new Seller();
+        this.personalInformation = new PersonalInformation();
+        this.idSeller = 0;
+        
+        this.cleanListSellers();
+        this.showListSellers();
+
+        this.disableButtonUpdateAndDelete();
     }
 
     /**
@@ -27,7 +53,7 @@ public class UISelller extends javax.swing.JInternalFrame {
         buttonAdd = new javax.swing.JButton();
         buttonUpdate = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
-        buttonClearInput = new javax.swing.JButton();
+        buttonCleanInput = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTextLasName = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -37,6 +63,8 @@ public class UISelller extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jTextPassword = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -69,15 +97,47 @@ public class UISelller extends javax.swing.JInternalFrame {
 
         buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add.png"))); // NOI18N
         buttonAdd.setText("Agregar");
+        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    buttonAddSellerActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         buttonUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/editar.png"))); // NOI18N
         buttonUpdate.setText("Editar");
+        buttonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    buttonUpdateActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
         buttonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete.png"))); // NOI18N
         buttonDelete.setText("Eliminar");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    buttonDeleteActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
-        buttonClearInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clean.png"))); // NOI18N
-        buttonClearInput.setText("Limpiar");
+        buttonCleanInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clean.png"))); // NOI18N
+        buttonCleanInput.setText("Limpiar");
+        buttonCleanInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCleanInputActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Apellidos:");
 
@@ -92,6 +152,8 @@ public class UISelller extends javax.swing.JInternalFrame {
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         jLabel15.setText("Acciónes");
+
+        jLabel18.setText("Password:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,29 +176,34 @@ public class UISelller extends javax.swing.JInternalFrame {
                             .addComponent(jTextEmail)
                             .addComponent(jTextRFC, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextName, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextLasName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextLasName, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(buttonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonClearInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonCleanInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buttonDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buttonUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addGap(37, 37, 37))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -182,9 +249,12 @@ public class UISelller extends javax.swing.JInternalFrame {
                                 .addComponent(jTextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonClearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonCleanInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -196,7 +266,7 @@ public class UISelller extends javax.swing.JInternalFrame {
         jLabel11.setText("Refaccioraria REFSUL");
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel12.setText("En este apartado usted podrá Agregar nuevos Clientes.");
+        jLabel12.setText("En este apartado usted podrá Agregar nuevos Vendedores.");
 
         jLabel13.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         jLabel13.setText("También Editar su información y Eliminar ");
@@ -243,9 +313,22 @@ public class UISelller extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "Apellidos", "RFC", "Dirección", "Email", "Telefono", "Usuario"
+                "Id", "Nombre", "Apellidos", "RFC", "Dirección", "Email", "Telefono", "Usuario", "Password"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableSeller.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableSellerMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableSeller);
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -310,10 +393,170 @@ public class UISelller extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonAddSellerActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        this.idSeller = 0;
+        this.buildSelller();
+
+        if( this.sellerController.createSeller( this.seller ) ) {
+            this.completeAddAction();
+            JOptionPane.showMessageDialog( null, "Vendedor agregado correctamente",
+                    "Vendedor agregado", JOptionPane.INFORMATION_MESSAGE );
+        } else {
+            JOptionPane.showMessageDialog( null, "Error al agregar nuevo vendedor",
+                    "Error al agregar", JOptionPane.WARNING_MESSAGE );
+        }
+    }
+
+    public void showListSellers() throws SQLException
+    {
+        List<Seller> listSellers = this.sellerController.getSellers();
+        this.tableModel = ( DefaultTableModel ) this.tableSeller.getModel();
+
+        for( Seller seller : listSellers )
+        {
+            this.tableModel.addRow( new Object[]{ seller.getIdSeller(), seller.getPersonalInformation().getName(), seller.getPersonalInformation().getLastName(), seller.getPersonalInformation().getRfc(),
+                    seller.getPersonalInformation().getAddress(), seller.getPersonalInformation().getEmail(), seller.getPersonalInformation().getPhoneNumber(), seller.getUserName(), seller.getPassword() } );
+        }
+    }
+
+    private void tableSellerMouseClicked( java.awt.event.MouseEvent evt )
+    {
+        this.disableButtonAdd();
+        this.activeButtonUpdateAndDelete();
+
+        int selectedItem = this.tableSeller.rowAtPoint( evt.getPoint() );
+        this.idSeller = Integer.parseInt( this.tableSeller.getValueAt( selectedItem, 0 ) + "" );
+        this.jTextName.setText( this.tableSeller.getValueAt( selectedItem, 1 ) + "" );
+        this.jTextLasName.setText( this.tableSeller.getValueAt( selectedItem, 2 ) + "" );
+        this.jTextRFC.setText( this.tableSeller.getValueAt( selectedItem, 3 ) + "" );
+        this.jTextAddress.setText( this.tableSeller.getValueAt( selectedItem, 4 ) + "" );
+        this.jTextEmail.setText( this.tableSeller.getValueAt( selectedItem, 5 ) + "" );
+        this.jTextPhone.setText( this.tableSeller.getValueAt( selectedItem, 6 ) + "" );
+        this.jTextUserName.setText( this.tableSeller.getValueAt( selectedItem, 7 ) + "" );
+        this.jTextPassword.setText( this.tableSeller.getValueAt( selectedItem, 8 ) + "" );
+    }
+
+    private void buttonUpdateActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        int confirm = JOptionPane.showConfirmDialog( null, "¿Desea guardar cambios?\n" +
+                        "Los datos del vendedor se modificaran" , "Actualizando Vendedor",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+
+        this.buildSelller();
+
+        if( confirm == 0 )
+        {
+            if( this.sellerController.updateSeller( this.seller ) ) {
+                this.completeDeleteOrUpdateAction();
+                JOptionPane.showMessageDialog( null, "Vendedor actualizado correctamente",
+                        "Vendedor actualizado", JOptionPane.INFORMATION_MESSAGE );
+            } else {
+                JOptionPane.showMessageDialog( null, "Error al actualizar vendedor",
+                        "Error al actualizar", JOptionPane.WARNING_MESSAGE );
+            }
+        }
+    }
+
+    private void buttonDeleteActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        int confirm = JOptionPane.showConfirmDialog( null, "¿Desea eliminar el vendedor?\n" +
+                        "El vendedor se eliminará permanentemente" , "Eliminar Vendedor",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+
+        if( confirm == 0 ) {
+            this.sellerController.deleteSeller( this.idSeller );
+            this.completeDeleteOrUpdateAction();
+            JOptionPane.showMessageDialog( null, "Vendedor se elimino correctamente",
+                    "Vendedor eliminado", JOptionPane.INFORMATION_MESSAGE );
+        }
+    }
+
+    private void buttonCleanInputActionPerformed( java.awt.event.ActionEvent evt )
+    {
+        this.cleanFormInput();
+        this.disableButtonUpdateAndDelete();
+        this.activeButtonAdd();
+    }
+    
+    public void cleanListSellers()
+    {
+        this.tableModel = ( DefaultTableModel ) this.tableSeller.getModel();
+        for( int i = this.tableModel.getRowCount() - 1 ; i >= 0 ; i-- )
+        {
+            this.tableModel.removeRow( i );
+        }
+    }
+
+    private void cleanFormInput()
+    {
+        this.jTextName.setText( null );
+        this.jTextLasName.setText( null );
+        this.jTextRFC.setText( null );
+        this.jTextAddress.setText( null );
+        this.jTextEmail.setText( null );
+        this.jTextPhone.setText( null );
+        this.jTextUserName.setText( null );
+        this.jTextPassword.setText( null );
+    }
+
+    private void disableButtonAdd()
+    {
+        this.buttonAdd.setEnabled( false );
+    }
+
+    private void disableButtonUpdateAndDelete()
+    {
+        this.buttonUpdate.setEnabled( false );
+        this.buttonDelete.setEnabled( false );
+    }
+
+    private void activeButtonAdd()
+    {
+        this.buttonAdd.setEnabled( true );
+    }
+
+    private void activeButtonUpdateAndDelete()
+    {
+        this.buttonUpdate.setEnabled( true );
+        this.buttonDelete.setEnabled( true );
+    }
+
+    private void completeAddAction() throws SQLException
+    {
+        this.cleanListSellers();
+        this.showListSellers();
+        this.cleanFormInput();
+    }
+
+    private void completeDeleteOrUpdateAction() throws SQLException
+    {
+        this.cleanListSellers();
+        this.cleanFormInput();
+        this.showListSellers();
+        this.disableButtonUpdateAndDelete();
+        this.activeButtonAdd();
+    }
+
+    private void buildSelller() {
+        this.personalInformation.setIdInformation( 0 );
+        this.personalInformation.setName( jTextName.getText() );
+        this.personalInformation.setLastName( jTextLasName.getText() );
+        this.personalInformation.setRfc( jTextRFC.getText() );
+        this.personalInformation.setAddress( jTextAddress.getText() );
+        this.personalInformation.setEmail( jTextEmail.getText() );
+        this.personalInformation.setPhoneNumber( jTextPhone.getText() );
+
+        this.seller.setIdSeller( this.idSeller );
+        this.seller.setUserName( jTextUserName.getText() );
+        this.seller.setPassword( jTextPassword.getText() );
+
+        this.seller.setPersonalInformation( this.personalInformation );
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
-    private javax.swing.JButton buttonClearInput;
+    private javax.swing.JButton buttonCleanInput;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonUpdate;
     javax.swing.JLabel jLabel1;
@@ -325,6 +568,7 @@ public class UISelller extends javax.swing.JInternalFrame {
     javax.swing.JLabel jLabel15;
     javax.swing.JLabel jLabel16;
     javax.swing.JLabel jLabel17;
+    javax.swing.JLabel jLabel18;
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel4;
     javax.swing.JLabel jLabel5;
@@ -340,6 +584,7 @@ public class UISelller extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextLasName;
     private javax.swing.JTextField jTextName;
+    javax.swing.JPasswordField jTextPassword;
     private javax.swing.JTextField jTextPhone;
     private javax.swing.JTextField jTextRFC;
     private javax.swing.JTextField jTextUserName;
