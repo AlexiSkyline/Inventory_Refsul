@@ -1,9 +1,9 @@
 package com.refsul.inventory_refsul.models.staff;
 
-public class Provider extends PersonalInformation
+public class Provider
 {
     private Integer idProvider;
-
+    private PersonalInformation personalInformation;
     public Provider() {}
 
     public Integer getIdProvider() 
@@ -14,5 +14,15 @@ public class Provider extends PersonalInformation
     public void setIdProvider( Integer idProvider ) 
     {
         this.idProvider = idProvider;
+    }
+
+    public PersonalInformation getPersonalInformation()
+    {
+        return personalInformation;
+    }
+
+    public void setPersonalInformation( PersonalInformation personalInformation )
+    {
+        this.personalInformation = personalInformation;
     }
 }

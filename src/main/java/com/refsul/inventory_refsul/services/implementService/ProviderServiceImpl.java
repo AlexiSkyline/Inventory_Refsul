@@ -1,37 +1,27 @@
 package com.refsul.inventory_refsul.services.implementService;
 
-import com.refsul.inventory_refsul.repository.implementsRepository.Staff.SellerRepositoryImpl;
-import com.refsul.inventory_refsul.repository.interfaces.SellerRepository;
-import com.refsul.inventory_refsul.services.interfaces.SellerService;
+import com.refsul.inventory_refsul.models.staff.Provider;
+import com.refsul.inventory_refsul.repository.implementsRepository.Staff.ProviderRepositoryImpl;
+import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
+import com.refsul.inventory_refsul.services.interfaces.ProviderService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
-import com.refsul.inventory_refsul.models.staff.Seller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class SellerServiceImpl implements SellerService
+public class ProviderServiceImpl implements ProviderService
 {
-    private SellerRepository repository;
+    private CrudRepository repository;
 
-    public SellerServiceImpl()
+    public ProviderServiceImpl()
     {
-        this.repository = new SellerRepositoryImpl();
+        this.repository = new ProviderRepositoryImpl();
     }
 
     @Override
-    public Optional<Seller> login( String userName, String password ) throws SQLException
-    {
-        try( Connection connection = DataBaseConnection.getConnection() )
-        {
-            this.repository.setConnection( connection );
-            return this.repository.login( userName, password );
-        }
-    }
-
-    @Override
-    public List<Seller> findAll() throws SQLException
+    public List<Provider> findAll() throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -41,7 +31,7 @@ public class SellerServiceImpl implements SellerService
     }
 
     @Override
-    public Optional<Seller> findById( int id ) throws SQLException
+    public Optional<Provider> findById( int id ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -51,7 +41,7 @@ public class SellerServiceImpl implements SellerService
     }
 
     @Override
-    public void create( Seller seller ) throws SQLException
+    public void create( Provider provider ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -62,7 +52,7 @@ public class SellerServiceImpl implements SellerService
 
             try
             {
-                this.repository.create( seller );
+                this.repository.create( provider );
                 connection.commit();
             } catch ( SQLException e )
             {
@@ -73,7 +63,7 @@ public class SellerServiceImpl implements SellerService
     }
 
     @Override
-    public void update( Seller seller ) throws SQLException
+    public void update( Provider provider ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -84,7 +74,7 @@ public class SellerServiceImpl implements SellerService
 
             try
             {
-                this.repository.update( seller );
+                this.repository.update( provider );
                 connection.commit();
             } catch ( SQLException e )
             {

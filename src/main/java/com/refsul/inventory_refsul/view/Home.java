@@ -1,6 +1,7 @@
 package com.refsul.inventory_refsul.view;
 
 import com.refsul.inventory_refsul.view.internalsFrame.UICustomer;
+import com.refsul.inventory_refsul.view.internalsFrame.UIProvider;
 import com.refsul.inventory_refsul.view.internalsFrame.UISelller;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -148,7 +149,11 @@ public class Home extends javax.swing.JFrame {
         ItemProviders.setPreferredSize(new java.awt.Dimension(200, 50));
         ItemProviders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ItemProvidersActionPerformed(evt);
+                try {
+                    ItemProvidersActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         optionStaff.add(ItemProviders);
@@ -234,10 +239,10 @@ public class Home extends javax.swing.JFrame {
         this.showWindows( seller );
     }
 
-    private void ItemProvidersActionPerformed( java.awt.event.ActionEvent evt )
+    private void ItemProvidersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-//        Provider provider = new Provider();
-//        this.showWindows( provider );
+        UIProvider provider = new UIProvider();
+        this.showWindows( provider );
     }
 
     private void ItemCustomersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException

@@ -1,7 +1,6 @@
 package com.refsul.inventory_refsul.services.implementService;
 
 import com.refsul.inventory_refsul.models.staff.Customer;
-import com.refsul.inventory_refsul.models.staff.Seller;
 import com.refsul.inventory_refsul.repository.implementsRepository.Staff.CustomerRepositoryImpl;
 import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.services.interfaces.CustomerService;
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class CustomerServiceImpl implements CustomerService<Customer>
+public class CustomerServiceImpl implements CustomerService
 {
     private CrudRepository repository;
 
