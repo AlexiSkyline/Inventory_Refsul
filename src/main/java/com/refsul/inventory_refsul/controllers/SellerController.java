@@ -1,7 +1,7 @@
 package com.refsul.inventory_refsul.controllers;
 
-import com.refsul.inventory_refsul.services.implementService.PersonalInformationServiceImpl;
-import com.refsul.inventory_refsul.services.implementService.SellerServiceImpl;
+import com.refsul.inventory_refsul.services.implementService.staff.PersonalInformationServiceImpl;
+import com.refsul.inventory_refsul.services.implementService.staff.SellerServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.services.interfaces.SellerService;
 import com.refsul.inventory_refsul.models.staff.Seller;
@@ -39,7 +39,7 @@ public class SellerController
             }
 
             return true;
-        } catch ( SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }
@@ -54,9 +54,7 @@ public class SellerController
     {
         try {
             Optional<Seller> sellerOptional = this.sellerService.findById( seller.getIdSeller() );
-            Integer idSeller = sellerOptional.get().getIdSeller();
-
-            if( !idSeller.equals( null ) ) {
+            if( sellerOptional.isPresent() ) {
                 Integer idInformation = sellerOptional.get().getPersonalInformation().getIdInformation();
                 seller.getPersonalInformation().setIdInformation( idInformation );
 
@@ -64,8 +62,8 @@ public class SellerController
                 this.sellerService.update( seller );
             }
 
-            return true;
-        } catch (SQLException e) {
+            return sellerOptional.isPresent();
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }
@@ -73,21 +71,17 @@ public class SellerController
 
     public boolean deleteSeller( int id )
     {
-        try
-        {
+        try {
             Optional<Seller> sellerOptional = this.sellerService.findById( id );
-            Integer idSeller = sellerOptional.get().getIdSeller();
-
-            if( !idSeller.equals( null ) ) {
+            if( sellerOptional.isPresent() ) {
                 Integer idInformation = sellerOptional.get().getPersonalInformation().getIdInformation();
 
                 this.sellerService.delete( sellerOptional.get().getIdSeller() );
                 this.informationService.delete( idInformation );
             }
 
-            return true;
-        } catch ( SQLException e )
-        {
+            return sellerOptional.isPresent();
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }

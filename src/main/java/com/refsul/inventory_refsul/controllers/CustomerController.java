@@ -1,11 +1,10 @@
 package com.refsul.inventory_refsul.controllers;
 
 import com.refsul.inventory_refsul.models.staff.Customer;
-import com.refsul.inventory_refsul.services.implementService.CustomerServiceImpl;
-import com.refsul.inventory_refsul.services.implementService.PersonalInformationServiceImpl;
+import com.refsul.inventory_refsul.services.implementService.staff.CustomerServiceImpl;
+import com.refsul.inventory_refsul.services.implementService.staff.PersonalInformationServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.CustomerService;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
-import com.refsul.inventory_refsul.services.interfaces.ServiceCrud;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -34,7 +33,7 @@ public class CustomerController
             }
 
             return true;
-        } catch ( SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }
@@ -49,9 +48,7 @@ public class CustomerController
     {
         try {
             Optional<Customer> customerOptional = this.customerService.findById( customer.getIdCustomer() );
-            Integer idCustomer = customerOptional.get().getIdCustomer();
-
-            if( !idCustomer.equals( null ) ) {
+            if( customerOptional.isPresent() ) {
                 Integer idInformation = customerOptional.get().getPersonalInformation().getIdInformation();
                 customer.getPersonalInformation().setIdInformation( idInformation );
 
@@ -59,8 +56,8 @@ public class CustomerController
                 this.customerService.update( customer );
             }
 
-            return true;
-        } catch (SQLException e) {
+            return customerOptional.isPresent();
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }
@@ -68,21 +65,17 @@ public class CustomerController
 
     public boolean deleteCustomer( int id )
     {
-        try
-        {
+        try {
             Optional<Customer> customerOptional = this.customerService.findById( id );
-            Integer idCustomer = customerOptional.get().getIdCustomer();
-
-            if( !idCustomer.equals( null ) ) {
+            if( customerOptional.isPresent() ) {
                 Integer idInformation = customerOptional.get().getPersonalInformation().getIdInformation();
 
                 this.customerService.delete( customerOptional.get().getIdCustomer() );
                 this.informationService.delete( idInformation );
             }
 
-            return true;
-        } catch ( SQLException e )
-        {
+            return customerOptional.isPresent();
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }

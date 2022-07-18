@@ -1,4 +1,4 @@
-package com.refsul.inventory_refsul.repository.implementsRepository.Business;
+package com.refsul.inventory_refsul.repository.implementsRepository.business;
 
 import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.models.business.Brand;

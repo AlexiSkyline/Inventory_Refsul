@@ -1,37 +1,27 @@
-package com.refsul.inventory_refsul.services.implementService;
+package com.refsul.inventory_refsul.services.implementService.business;
 
-import com.refsul.inventory_refsul.repository.implementsRepository.Staff.SellerRepositoryImpl;
-import com.refsul.inventory_refsul.repository.interfaces.SellerRepository;
-import com.refsul.inventory_refsul.services.interfaces.SellerService;
+import com.refsul.inventory_refsul.models.business.PaymentMethod;
+import com.refsul.inventory_refsul.repository.implementsRepository.business.PaymentMethodRepositoryImpl;
+import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
+import com.refsul.inventory_refsul.services.interfaces.PaymentMethodService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
-import com.refsul.inventory_refsul.models.staff.Seller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class SellerServiceImpl implements SellerService
+public class PaymentMethodServiceImpl implements PaymentMethodService
 {
-    private SellerRepository repository;
+    private CrudRepository repository;
 
-    public SellerServiceImpl()
+    public PaymentMethodServiceImpl()
     {
-        this.repository = new SellerRepositoryImpl();
+        this.repository = new PaymentMethodRepositoryImpl();
     }
 
     @Override
-    public Optional<Seller> login( String userName, String password ) throws SQLException
-    {
-        try( Connection connection = DataBaseConnection.getConnection() )
-        {
-            this.repository.setConnection( connection );
-            return this.repository.login( userName, password );
-        }
-    }
-
-    @Override
-    public List<Seller> findAll() throws SQLException
+    public List<PaymentMethod> findAll() throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -41,7 +31,7 @@ public class SellerServiceImpl implements SellerService
     }
 
     @Override
-    public Optional<Seller> findById( int id ) throws SQLException
+    public Optional<PaymentMethod> findById( int id ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -51,7 +41,7 @@ public class SellerServiceImpl implements SellerService
     }
 
     @Override
-    public void create( Seller seller ) throws SQLException
+    public void create( PaymentMethod paymentMethod ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -62,7 +52,7 @@ public class SellerServiceImpl implements SellerService
 
             try
             {
-                this.repository.create( seller );
+                this.repository.create( paymentMethod );
                 connection.commit();
             } catch ( SQLException e )
             {
@@ -73,7 +63,7 @@ public class SellerServiceImpl implements SellerService
     }
 
     @Override
-    public void update( Seller seller ) throws SQLException
+    public void update( PaymentMethod paymentMethod ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -82,12 +72,10 @@ public class SellerServiceImpl implements SellerService
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
-                this.repository.update( seller );
+            try {
+                this.repository.update( paymentMethod );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }
@@ -104,12 +92,10 @@ public class SellerServiceImpl implements SellerService
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
+            try {
                 this.repository.delete( id );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }

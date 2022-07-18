@@ -1,4 +1,4 @@
-package com.refsul.inventory_refsul.view.internalsFrame;
+package com.refsul.inventory_refsul.view.internalsFrame.staff;
 
 import com.refsul.inventory_refsul.controllers.CustomerController;
 import com.refsul.inventory_refsul.models.staff.Customer;

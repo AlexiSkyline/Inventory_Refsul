@@ -1,27 +1,37 @@
-package com.refsul.inventory_refsul.services.implementService;
+package com.refsul.inventory_refsul.services.implementService.staff;
 
-import com.refsul.inventory_refsul.models.staff.Provider;
-import com.refsul.inventory_refsul.repository.implementsRepository.Staff.ProviderRepositoryImpl;
-import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
-import com.refsul.inventory_refsul.services.interfaces.ProviderService;
+import com.refsul.inventory_refsul.repository.implementsRepository.staff.SellerRepositoryImpl;
+import com.refsul.inventory_refsul.repository.interfaces.SellerRepository;
+import com.refsul.inventory_refsul.services.interfaces.SellerService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
+import com.refsul.inventory_refsul.models.staff.Seller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class ProviderServiceImpl implements ProviderService
+public class SellerServiceImpl implements SellerService
 {
-    private CrudRepository repository;
+    private SellerRepository repository;
 
-    public ProviderServiceImpl()
+    public SellerServiceImpl()
     {
-        this.repository = new ProviderRepositoryImpl();
+        this.repository = new SellerRepositoryImpl();
     }
 
     @Override
-    public List<Provider> findAll() throws SQLException
+    public Optional<Seller> login( String userName, String password ) throws SQLException
+    {
+        try( Connection connection = DataBaseConnection.getConnection() )
+        {
+            this.repository.setConnection( connection );
+            return this.repository.login( userName, password );
+        }
+    }
+
+    @Override
+    public List<Seller> findAll() throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -31,7 +41,7 @@ public class ProviderServiceImpl implements ProviderService
     }
 
     @Override
-    public Optional<Provider> findById( int id ) throws SQLException
+    public Optional<Seller> findById( int id ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -41,7 +51,7 @@ public class ProviderServiceImpl implements ProviderService
     }
 
     @Override
-    public void create( Provider provider ) throws SQLException
+    public void create( Seller seller ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -50,12 +60,10 @@ public class ProviderServiceImpl implements ProviderService
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
-                this.repository.create( provider );
+            try {
+                this.repository.create( seller );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }
@@ -63,7 +71,7 @@ public class ProviderServiceImpl implements ProviderService
     }
 
     @Override
-    public void update( Provider provider ) throws SQLException
+    public void update( Seller seller ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -74,10 +82,9 @@ public class ProviderServiceImpl implements ProviderService
 
             try
             {
-                this.repository.update( provider );
+                this.repository.update( seller );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }
@@ -94,12 +101,10 @@ public class ProviderServiceImpl implements ProviderService
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
+            try {
                 this.repository.delete( id );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }

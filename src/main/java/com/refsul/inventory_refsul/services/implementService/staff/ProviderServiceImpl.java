@@ -1,9 +1,9 @@
-package com.refsul.inventory_refsul.services.implementService;
+package com.refsul.inventory_refsul.services.implementService.staff;
 
-import com.refsul.inventory_refsul.models.staff.PersonalInformation;
-import com.refsul.inventory_refsul.repository.implementsRepository.Staff.PersonalInfoRepositoryImpl;
-import com.refsul.inventory_refsul.repository.interfaces.PersonalInformationRepository;
-import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
+import com.refsul.inventory_refsul.models.staff.Provider;
+import com.refsul.inventory_refsul.repository.implementsRepository.staff.ProviderRepositoryImpl;
+import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
+import com.refsul.inventory_refsul.services.interfaces.ProviderService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
 import java.sql.Connection;
@@ -11,27 +11,17 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class PersonalInformationServiceImpl implements PersonalInformationService
+public class ProviderServiceImpl implements ProviderService
 {
-    private PersonalInformationRepository repository;
+    private CrudRepository repository;
 
-    public PersonalInformationServiceImpl()
+    public ProviderServiceImpl()
     {
-        this.repository = new PersonalInfoRepositoryImpl();
+        this.repository = new ProviderRepositoryImpl();
     }
 
     @Override
-    public int getLastId() throws SQLException
-    {
-        try ( Connection connection = DataBaseConnection.getConnection() )
-        {
-            this.repository.setConnection( connection );
-            return this.repository.getLastId();
-        }
-    }
-
-    @Override
-    public List<PersonalInformation> findAll() throws SQLException
+    public List<Provider> findAll() throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -41,7 +31,7 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     }
 
     @Override
-    public Optional<PersonalInformation> findById( int id ) throws SQLException
+    public Optional<Provider> findById( int id ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -51,7 +41,7 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     }
 
     @Override
-    public void create( PersonalInformation personalInformation ) throws SQLException
+    public void create( Provider provider ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -60,9 +50,8 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
-                this.repository.create( personalInformation );
+            try {
+                this.repository.create( provider );
                 connection.commit();
             } catch ( SQLException e )
             {
@@ -73,7 +62,7 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
     }
 
     @Override
-    public void update( PersonalInformation personalInformation ) throws SQLException
+    public void update( Provider provider ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -82,12 +71,10 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
-                this.repository.update( personalInformation );
+            try {
+                this.repository.update( provider );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }
@@ -104,12 +91,10 @@ public class PersonalInformationServiceImpl implements PersonalInformationServic
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
+            try {
                 this.repository.delete( id );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }

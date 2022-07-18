@@ -1,8 +1,9 @@
 package com.refsul.inventory_refsul.view;
 
-import com.refsul.inventory_refsul.view.internalsFrame.UICustomer;
-import com.refsul.inventory_refsul.view.internalsFrame.UIProvider;
-import com.refsul.inventory_refsul.view.internalsFrame.UISelller;
+import com.refsul.inventory_refsul.view.internalsFrame.staff.UICustomer;
+import com.refsul.inventory_refsul.view.internalsFrame.staff.UIProvider;
+import com.refsul.inventory_refsul.view.internalsFrame.staff.UISelller;
+import com.refsul.inventory_refsul.view.internalsFrame.business.UIPaymentMethod;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JInternalFrame;
@@ -197,6 +198,15 @@ public class Home extends javax.swing.JFrame {
         ItemPaymentMethods.setText("  Método de pago");
         ItemPaymentMethods.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemPaymentMethods.setPreferredSize(new java.awt.Dimension(260, 50));
+        ItemPaymentMethods.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    ItemPaymentMethodsActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         optionInventory.add(ItemPaymentMethods);
         optionInventory.add(jSeparator6);
 
@@ -249,6 +259,12 @@ public class Home extends javax.swing.JFrame {
     {
         UICustomer customer = new UICustomer();
         this.showWindows( customer );
+    }
+
+    private void ItemPaymentMethodsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        UIPaymentMethod paymentMethod = new UIPaymentMethod();
+        this.showWindows( paymentMethod );
     }
 
     private javax.swing.JMenuItem ItemBrands;

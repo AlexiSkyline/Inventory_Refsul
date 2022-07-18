@@ -1,8 +1,8 @@
 package com.refsul.inventory_refsul.controllers;
 
 import com.refsul.inventory_refsul.models.staff.Provider;
-import com.refsul.inventory_refsul.services.implementService.PersonalInformationServiceImpl;
-import com.refsul.inventory_refsul.services.implementService.ProviderServiceImpl;
+import com.refsul.inventory_refsul.services.implementService.staff.PersonalInformationServiceImpl;
+import com.refsul.inventory_refsul.services.implementService.staff.ProviderServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.services.interfaces.ProviderService;
 
@@ -33,7 +33,7 @@ public class ProviderController
             }
 
             return true;
-        } catch ( SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }
@@ -48,9 +48,7 @@ public class ProviderController
     {
         try {
             Optional<Provider> providerOptional = this.prodiverService.findById( provider.getIdProvider() );
-            Integer idProvider = providerOptional.get().getIdProvider();
-
-            if( !idProvider.equals( null ) ) {
+            if( providerOptional.isPresent() ) {
                 Integer idInformation = providerOptional.get().getPersonalInformation().getIdInformation();
                 provider.getPersonalInformation().setIdInformation( idInformation );
 
@@ -58,8 +56,8 @@ public class ProviderController
                 this.prodiverService.update( provider );
             }
 
-            return true;
-        } catch (SQLException e) {
+            return providerOptional.isPresent();
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }
@@ -67,21 +65,17 @@ public class ProviderController
 
     public boolean deleteProvider( int id )
     {
-        try
-        {
+        try {
             Optional<Provider> providerOptional = this.prodiverService.findById( id );
-            Integer idProvider = providerOptional.get().getIdProvider();
-
-            if( !idProvider.equals( null ) ) {
+            if( providerOptional.isPresent() ) {
                 Integer idInformation = providerOptional.get().getPersonalInformation().getIdInformation();
 
                 this.prodiverService.delete( providerOptional.get().getIdProvider() );
                 this.informationService.delete( idInformation );
             }
 
-            return true;
-        } catch ( SQLException e )
-        {
+            return providerOptional.isPresent();
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }

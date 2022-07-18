@@ -1,9 +1,9 @@
-package com.refsul.inventory_refsul.services.implementService;
+package com.refsul.inventory_refsul.services.implementService.staff;
 
-import com.refsul.inventory_refsul.models.staff.Customer;
-import com.refsul.inventory_refsul.repository.implementsRepository.Staff.CustomerRepositoryImpl;
-import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
-import com.refsul.inventory_refsul.services.interfaces.CustomerService;
+import com.refsul.inventory_refsul.models.staff.PersonalInformation;
+import com.refsul.inventory_refsul.repository.implementsRepository.staff.PersonalInfoRepositoryImpl;
+import com.refsul.inventory_refsul.repository.interfaces.PersonalInformationRepository;
+import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
 import java.sql.Connection;
@@ -11,17 +11,27 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class CustomerServiceImpl implements CustomerService
+public class PersonalInformationServiceImpl implements PersonalInformationService
 {
-    private CrudRepository repository;
+    private PersonalInformationRepository repository;
 
-    public CustomerServiceImpl()
+    public PersonalInformationServiceImpl()
     {
-        this.repository = new CustomerRepositoryImpl();
+        this.repository = new PersonalInfoRepositoryImpl();
     }
 
     @Override
-    public List<Customer> findAll() throws SQLException
+    public int getLastId() throws SQLException
+    {
+        try ( Connection connection = DataBaseConnection.getConnection() )
+        {
+            this.repository.setConnection( connection );
+            return this.repository.getLastId();
+        }
+    }
+
+    @Override
+    public List<PersonalInformation> findAll() throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -31,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
-    public Optional<Customer> findById( int id ) throws SQLException
+    public Optional<PersonalInformation> findById( int id ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -41,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
-    public void create( Customer customer ) throws SQLException
+    public void create( PersonalInformation personalInformation ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -50,9 +60,8 @@ public class CustomerServiceImpl implements CustomerService
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
-                this.repository.create( customer );
+            try {
+                this.repository.create( personalInformation );
                 connection.commit();
             } catch ( SQLException e )
             {
@@ -63,7 +72,7 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
-    public void update( Customer customer ) throws SQLException
+    public void update( PersonalInformation personalInformation ) throws SQLException
     {
         try ( Connection connection = DataBaseConnection.getConnection() )
         {
@@ -72,12 +81,10 @@ public class CustomerServiceImpl implements CustomerService
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
-                this.repository.update( customer );
+            try {
+                this.repository.update( personalInformation );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }
@@ -94,12 +101,10 @@ public class CustomerServiceImpl implements CustomerService
                 connection.setAutoCommit( false );
             }
 
-            try
-            {
+            try {
                 this.repository.delete( id );
                 connection.commit();
-            } catch ( SQLException e )
-            {
+            } catch ( SQLException e ) {
                 connection.rollback();
                 e.printStackTrace();
             }

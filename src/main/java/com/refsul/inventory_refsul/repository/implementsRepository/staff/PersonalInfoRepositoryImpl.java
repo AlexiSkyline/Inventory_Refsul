@@ -1,4 +1,4 @@
-package com.refsul.inventory_refsul.repository.implementsRepository.Staff;
+package com.refsul.inventory_refsul.repository.implementsRepository.staff;
 
 import com.refsul.inventory_refsul.repository.interfaces.PersonalInformationRepository;
 import com.refsul.inventory_refsul.models.staff.PersonalInformation;
