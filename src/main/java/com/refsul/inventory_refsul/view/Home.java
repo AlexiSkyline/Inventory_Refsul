@@ -1,6 +1,7 @@
 package com.refsul.inventory_refsul.view;
 
 import com.refsul.inventory_refsul.view.internalsFrame.business.UIBrand;
+import com.refsul.inventory_refsul.view.internalsFrame.business.UIUnitMeasurement;
 import com.refsul.inventory_refsul.view.internalsFrame.staff.UICustomer;
 import com.refsul.inventory_refsul.view.internalsFrame.staff.UIProvider;
 import com.refsul.inventory_refsul.view.internalsFrame.staff.UISelller;
@@ -215,6 +216,15 @@ public class Home extends javax.swing.JFrame {
         ItemUnitsMeasurements.setText("  Unidades de medida");
         ItemUnitsMeasurements.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemUnitsMeasurements.setPreferredSize(new java.awt.Dimension(200, 50));
+        ItemUnitsMeasurements.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    ItemUnitsMeasurementsActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         optionInventory.add(ItemUnitsMeasurements);
         optionInventory.add(jSeparator7);
 
@@ -273,6 +283,12 @@ public class Home extends javax.swing.JFrame {
     {
         UIPaymentMethod paymentMethod = new UIPaymentMethod();
         this.showWindows( paymentMethod );
+    }
+
+    private void ItemUnitsMeasurementsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        UIUnitMeasurement unitMeasurement = new UIUnitMeasurement();
+        this.showWindows( unitMeasurement );
     }
 
     private void ItemBrandActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
