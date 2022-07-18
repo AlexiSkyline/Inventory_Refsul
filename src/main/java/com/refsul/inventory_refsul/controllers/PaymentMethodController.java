@@ -22,7 +22,7 @@ public class PaymentMethodController
         try {
             this.service.create( paymentMethod );
             return true;
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }
@@ -42,7 +42,7 @@ public class PaymentMethodController
             }
 
             return paymentMethodOptional.isPresent();
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }
@@ -57,7 +57,7 @@ public class PaymentMethodController
             }
 
             return paymentMethodOptional.isPresent();
-        } catch (SQLException e) {
+        } catch ( SQLException e ) {
             e.printStackTrace();
             return false;
         }

@@ -1,30 +1,30 @@
 package com.refsul.inventory_refsul.view.internalsFrame.business;
 
-import com.refsul.inventory_refsul.controllers.PaymentMethodController;
-import com.refsul.inventory_refsul.models.business.PaymentMethod;
+import com.refsul.inventory_refsul.controllers.BrandController;
+import com.refsul.inventory_refsul.models.business.Brand;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UIPaymentMethod extends javax.swing.JInternalFrame {
-    PaymentMethodController paymentMethodController;
+public class UIBrand extends javax.swing.JInternalFrame {
+    BrandController brandController;
     DefaultTableModel tableModel;
-    PaymentMethod paymentMethod;
-    private int idPaymentMethod;
+    Brand brand;
+    private int idBrand;
 
-    public UIPaymentMethod() throws SQLException {
+    public UIBrand() throws SQLException {
         initComponents();
         this.setResizable( false );
 
-        this.paymentMethodController = new PaymentMethodController();
+        this.brandController = new BrandController();
         this.tableModel = new DefaultTableModel();
-        this.paymentMethod = new PaymentMethod();
-        this.idPaymentMethod = 0;
+        this.brand = new Brand();
+        this.idBrand = 0;
         
-        this.cleanListPaymentMethods();
-        this.showListPaymentMethods();
+        this.cleanListBrands();
+        this.showListBrands();
 
         this.disableButtonUpdateAndDelete();
     }
@@ -55,7 +55,7 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
         buttonCleanInput = new javax.swing.JButton();
         jPanel03 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablePaymentMethod = new javax.swing.JTable();
+        tableBrand = new javax.swing.JTable();
         jLabel09 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
 
@@ -72,7 +72,7 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
         jLabel02.setText("Refaccioraria REFSUL");
 
         jLabel03.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel03.setText("En este apartado usted podrá Agregar nuevo Método de pago.");
+        jLabel03.setText("En este apartado usted podrá Agregar nuevas Marcas.");
 
         jLabel04.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         jLabel04.setText("También Editar su información y Eliminar ");
@@ -86,14 +86,14 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
                 .addComponent(jLabel01)
                 .addGroup(jPanel01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel01Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jLabel04))
-                    .addGroup(jPanel01Layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
+                        .addGap(199, 199, 199)
                         .addComponent(jLabel02))
                     .addGroup(jPanel01Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel03)))
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel03))
+                    .addGroup(jPanel01Layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(jLabel04)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel01Layout.setVerticalGroup(
@@ -103,9 +103,9 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
                 .addGroup(jPanel01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel01Layout.createSequentialGroup()
                         .addComponent(jLabel02)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel03)
                         .addGap(7, 7, 7)
+                        .addComponent(jLabel03)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel04))
                     .addComponent(jLabel01))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -117,14 +117,14 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
         jLabel05.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         jLabel05.setText("Llene todos los campos Para realizar cualquier acción");
 
-        jLabel06.setText("Descripción del Método de pago:");
+        jLabel06.setText("Descripción de la Marca:");
 
         jTextDescription.setVerifyInputWhenFocusTarget(false);
 
         jLabel07.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         jLabel07.setText("Acciónes");
 
-        jLabel08.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/wallet.png"))); // NOI18N
+        jLabel08.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Brands_Banner.png"))); // NOI18N
 
         buttonAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add.png"))); // NOI18N
         buttonAdd.setText("Agregar");
@@ -175,40 +175,38 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
         jPanel02Layout.setHorizontalGroup(
             jPanel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel02Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel02Layout.createSequentialGroup()
-                        .addContainerGap(247, Short.MAX_VALUE)
-                        .addGroup(jPanel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel02Layout.createSequentialGroup()
-                                .addComponent(jLabel05)
-                                .addGap(101, 101, 101))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel02Layout.createSequentialGroup()
-                                .addComponent(buttonAdd)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonDelete)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonCleanInput, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(82, 82, 82))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel02Layout.createSequentialGroup()
-                                .addComponent(jLabel07)
-                                .addGap(281, 281, 281))))
-                    .addGroup(jPanel02Layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jLabel06)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel02Layout.createSequentialGroup()
+                        .addComponent(jLabel07)
+                        .addGap(229, 229, 229))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel02Layout.createSequentialGroup()
+                        .addComponent(buttonAdd)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonCleanInput, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel02Layout.createSequentialGroup()
+                        .addComponent(jLabel05)
+                        .addGap(30, 30, 30)))
                 .addComponent(jLabel08)
-                .addGap(54, 54, 54))
+                .addGap(29, 29, 29))
+            .addGroup(jPanel02Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jLabel06)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel02Layout.setVerticalGroup(
             jPanel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel02Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addComponent(jLabel05)
-                .addGap(24, 24, 24)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel02Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel06, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,7 +225,7 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
         jPanel03.setBackground(new java.awt.Color(255, 255, 255));
         jPanel03.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tablePaymentMethod.setModel(new javax.swing.table.DefaultTableModel(
+        tableBrand.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -243,15 +241,15 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablePaymentMethod.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableBrand.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablePaymentMethodMouseClicked(evt);
+                tableBrandMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tablePaymentMethod);
+        jScrollPane1.setViewportView(tableBrand);
 
         jLabel09.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jLabel09.setText("En este apartado podrás Visualizar la lista de Método de pago Registrados");
+        jLabel09.setText("En este apartado podrás Visualizar la lista de Marcas Registrados");
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel10.setText("Seleccione una Columna a Editar o Eliminar");
@@ -266,21 +264,21 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 897, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel03Layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
-                        .addComponent(jLabel10))
+                        .addGap(226, 226, 226)
+                        .addComponent(jLabel09))
                     .addGroup(jPanel03Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jLabel09)))
+                        .addGap(336, 336, 336)
+                        .addComponent(jLabel10)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel03Layout.setVerticalGroup(
             jPanel03Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel03Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel09, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -314,10 +312,10 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
 
     private void buttonAddActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        this.idPaymentMethod = 0;
-        this.buildPaymentMethod();
+        this.idBrand = 0;
+        this.buildBrand();
 
-        if( this.paymentMethodController.createPaymentMethod( this.paymentMethod ) ) {
+        if( this.brandController.createBrand( this.brand ) ) {
             this.completeAddAction();
             JOptionPane.showMessageDialog( null, "Método de pago agregado correctamente",
                     "Método de pago agregado", JOptionPane.INFORMATION_MESSAGE );
@@ -327,25 +325,25 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
         }
     }
 
-    public void showListPaymentMethods() throws SQLException
+    public void showListBrands() throws SQLException
     {
-        List<PaymentMethod> listPaymentMethods = this.paymentMethodController.getPaymentMethods();
-        this.tableModel = ( DefaultTableModel ) this.tablePaymentMethod.getModel();
+        List<Brand> listBrands = this.brandController.getBrands();
+        this.tableModel = ( DefaultTableModel ) this.tableBrand.getModel();
 
-        for( PaymentMethod paymentMethod : listPaymentMethods )
+        for( Brand brand : listBrands )
         {
-            this.tableModel.addRow( new Object[]{ paymentMethod.getIdPaymentMethod(), paymentMethod.getDescription() } );
+            this.tableModel.addRow( new Object[]{ brand.getIdBrand(), brand.getDescription() } );
         }
     }
 
-    private void tablePaymentMethodMouseClicked( java.awt.event.MouseEvent evt )
+    private void tableBrandMouseClicked( java.awt.event.MouseEvent evt )
     {
         this.disableButtonAdd();
         this.activeButtonUpdateAndDelete();
 
-        int selectedItem = this.tablePaymentMethod.rowAtPoint( evt.getPoint() );
-        this.idPaymentMethod = Integer.parseInt( this.tablePaymentMethod.getValueAt( selectedItem, 0 ) + "" );
-        this.jTextDescription.setText( this.tablePaymentMethod.getValueAt( selectedItem, 1 ) + "" );
+        int selectedItem = this.tableBrand.rowAtPoint( evt.getPoint() );
+        this.idBrand = Integer.parseInt( this.tableBrand.getValueAt( selectedItem, 0 ) + "" );
+        this.jTextDescription.setText( this.tableBrand.getValueAt( selectedItem, 1 ) + "" );
     }
 
     private void buttonUpdateActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
@@ -354,11 +352,11 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
                         "Los datos del Método de pago se modificaran" , "Actualizando Método de pago",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
 
-        this.buildPaymentMethod();
+        this.buildBrand();
 
         if( confirm == 0 )
         {
-            if( this.paymentMethodController.updatePaymentMethod( this.paymentMethod ) ) {
+            if( this.brandController.updateBrand( this.brand ) ) {
                 this.completeDeleteOrUpdateAction();
                 JOptionPane.showMessageDialog( null, "Método de pago actualizado correctamente",
                         "Método de pago actualizado", JOptionPane.INFORMATION_MESSAGE );
@@ -376,7 +374,7 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
 
         if( confirm == 0 ) {
-            this.paymentMethodController.deletePaymentMethod( this.idPaymentMethod );
+            this.brandController.deleteBrand( this.idBrand );
             this.completeDeleteOrUpdateAction();
             JOptionPane.showMessageDialog( null, "Método de pago se elimino correctamente",
                     "Método de pago eliminado", JOptionPane.INFORMATION_MESSAGE );
@@ -390,9 +388,9 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
         this.activeButtonAdd();
     }
     
-    public void cleanListPaymentMethods()
+    public void cleanListBrands()
     {
-        this.tableModel = ( DefaultTableModel ) this.tablePaymentMethod.getModel();
+        this.tableModel = ( DefaultTableModel ) this.tableBrand.getModel();
         for( int i = this.tableModel.getRowCount() - 1 ; i >= 0 ; i-- )
         {
             this.tableModel.removeRow( i );
@@ -428,22 +426,22 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
 
     private void completeAddAction() throws SQLException
     {
-        this.cleanListPaymentMethods();
-        this.showListPaymentMethods();
+        this.cleanListBrands();
+        this.showListBrands();
         this.cleanFormInput();
     }
     private void completeDeleteOrUpdateAction() throws SQLException
     {
-        this.cleanListPaymentMethods();
+        this.cleanListBrands();
         this.cleanFormInput();
-        this.showListPaymentMethods();
+        this.showListBrands();
         this.disableButtonUpdateAndDelete();
         this.activeButtonAdd();
     }
 
-    private void buildPaymentMethod() {
-        this.paymentMethod.setIdPaymentMethod( this.idPaymentMethod );
-        this.paymentMethod.setDescription( jTextDescription.getText() );
+    private void buildBrand() {
+        this.brand.setIdBrand( this.idBrand );
+        this.brand.setDescription( jTextDescription.getText() );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -466,6 +464,6 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
     javax.swing.JPanel jPanel03;
     javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextDescription;
-    private javax.swing.JTable tablePaymentMethod;
+    private javax.swing.JTable tableBrand;
     // End of variables declaration//GEN-END:variables
 }
