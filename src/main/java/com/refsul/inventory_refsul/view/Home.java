@@ -1,5 +1,6 @@
 package com.refsul.inventory_refsul.view;
 
+import com.refsul.inventory_refsul.view.internalsFrame.business.UIBrand;
 import com.refsul.inventory_refsul.view.internalsFrame.staff.UICustomer;
 import com.refsul.inventory_refsul.view.internalsFrame.staff.UIProvider;
 import com.refsul.inventory_refsul.view.internalsFrame.staff.UISelller;
@@ -176,7 +177,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
         optionStaff.add(ItemCustomers);
-
         navBar.add(optionStaff);
 
         optionInventory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/inventory.png"))); // NOI18N
@@ -223,8 +223,16 @@ public class Home extends javax.swing.JFrame {
         ItemBrands.setText("  Marcas");
         ItemBrands.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemBrands.setPreferredSize(new java.awt.Dimension(200, 50));
+        ItemBrands.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    ItemBrandActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         optionInventory.add(ItemBrands);
-
         navBar.add(optionInventory);
 
         setJMenuBar(navBar);
@@ -265,6 +273,12 @@ public class Home extends javax.swing.JFrame {
     {
         UIPaymentMethod paymentMethod = new UIPaymentMethod();
         this.showWindows( paymentMethod );
+    }
+
+    private void ItemBrandActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        UIBrand brand = new UIBrand();
+        this.showWindows( brand );
     }
 
     private javax.swing.JMenuItem ItemBrands;
