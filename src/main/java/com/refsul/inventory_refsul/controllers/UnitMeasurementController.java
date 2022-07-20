@@ -1,7 +1,7 @@
 package com.refsul.inventory_refsul.controllers;
 
-import com.refsul.inventory_refsul.models.business.UnitMeasurement;
-import com.refsul.inventory_refsul.services.implementService.business.UnitMeasurementServiceImpl;
+import com.refsul.inventory_refsul.models.UnitMeasurement;
+import com.refsul.inventory_refsul.services.implementService.UnitMeasurementServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.UnitMeasurementService;
 
 import java.sql.SQLException;

@@ -1,10 +1,10 @@
 package com.refsul.inventory_refsul.controllers;
 
-import com.refsul.inventory_refsul.services.implementService.staff.PersonalInformationServiceImpl;
-import com.refsul.inventory_refsul.services.implementService.staff.SellerServiceImpl;
+import com.refsul.inventory_refsul.services.implementService.PersonalInformationServiceImpl;
+import com.refsul.inventory_refsul.services.implementService.SellerServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.services.interfaces.SellerService;
-import com.refsul.inventory_refsul.models.staff.Seller;
+import com.refsul.inventory_refsul.models.Seller;
 
 import java.sql.SQLException;
 import java.util.List;

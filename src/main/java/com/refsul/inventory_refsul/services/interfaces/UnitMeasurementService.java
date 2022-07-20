@@ -1,5 +1,5 @@
 package com.refsul.inventory_refsul.services.interfaces;
 
-import com.refsul.inventory_refsul.models.business.UnitMeasurement;
+import com.refsul.inventory_refsul.models.UnitMeasurement;
 
 public interface UnitMeasurementService extends ServiceCrud<UnitMeasurement> {}

@@ -1,6 +1,6 @@
 package com.refsul.inventory_refsul.services.interfaces;
 
-import com.refsul.inventory_refsul.models.staff.PersonalInformation;
+import com.refsul.inventory_refsul.models.PersonalInformation;
 
 import java.sql.SQLException;
 

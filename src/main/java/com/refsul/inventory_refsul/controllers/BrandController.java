@@ -1,7 +1,7 @@
 package com.refsul.inventory_refsul.controllers;
 
-import com.refsul.inventory_refsul.models.business.Brand;
-import com.refsul.inventory_refsul.services.implementService.business.BrandServiceImpl;
+import com.refsul.inventory_refsul.models.Brand;
+import com.refsul.inventory_refsul.services.implementService.BrandServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.BrandService;
 
 import java.sql.SQLException;

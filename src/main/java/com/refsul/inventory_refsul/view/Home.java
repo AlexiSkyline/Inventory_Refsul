@@ -1,11 +1,12 @@
 package com.refsul.inventory_refsul.view;
 
-import com.refsul.inventory_refsul.view.internalsFrame.business.UIBrand;
-import com.refsul.inventory_refsul.view.internalsFrame.business.UIUnitMeasurement;
-import com.refsul.inventory_refsul.view.internalsFrame.staff.UICustomer;
-import com.refsul.inventory_refsul.view.internalsFrame.staff.UIProvider;
-import com.refsul.inventory_refsul.view.internalsFrame.staff.UISelller;
-import com.refsul.inventory_refsul.view.internalsFrame.business.UIPaymentMethod;
+import com.refsul.inventory_refsul.view.internalsFrame.UIBrand;
+import com.refsul.inventory_refsul.view.internalsFrame.UIUnitMeasurement;
+import com.refsul.inventory_refsul.view.internalsFrame.UIProduct;
+import com.refsul.inventory_refsul.view.internalsFrame.UICustomer;
+import com.refsul.inventory_refsul.view.internalsFrame.UIProvider;
+import com.refsul.inventory_refsul.view.internalsFrame.UISelller;
+import com.refsul.inventory_refsul.view.internalsFrame.UIPaymentMethod;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JInternalFrame;
@@ -118,7 +119,6 @@ public class Home extends javax.swing.JFrame {
         ItemSalesDetails.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemSalesDetails.setPreferredSize(new java.awt.Dimension(200, 50));
         optionSales.add(ItemSalesDetails);
-
         navBar.add(optionSales);
 
         optionStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/office-staff.png"))); // NOI18N
@@ -191,6 +191,15 @@ public class Home extends javax.swing.JFrame {
         ItemProducts.setText("  Productos");
         ItemProducts.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemProducts.setPreferredSize(new java.awt.Dimension(200, 50));
+        ItemProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    ItemProductsActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         optionInventory.add(ItemProducts);
         optionInventory.add(jSeparator5);
 
@@ -277,6 +286,12 @@ public class Home extends javax.swing.JFrame {
     {
         UICustomer customer = new UICustomer();
         this.showWindows( customer );
+    }
+
+    private void ItemProductsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        UIProduct product = new UIProduct();
+        this.showWindows( product );
     }
 
     private void ItemPaymentMethodsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException

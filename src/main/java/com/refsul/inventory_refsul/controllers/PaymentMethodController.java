@@ -1,7 +1,7 @@
 package com.refsul.inventory_refsul.controllers;
 
-import com.refsul.inventory_refsul.models.business.PaymentMethod;
-import com.refsul.inventory_refsul.services.implementService.business.PaymentMethodServiceImpl;
+import com.refsul.inventory_refsul.models.PaymentMethod;
+import com.refsul.inventory_refsul.services.implementService.PaymentMethodServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PaymentMethodService;
 
 import java.sql.SQLException;
