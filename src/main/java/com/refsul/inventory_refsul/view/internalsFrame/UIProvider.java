@@ -3,6 +3,11 @@ package com.refsul.inventory_refsul.view.internalsFrame;
 import com.refsul.inventory_refsul.controllers.ProviderController;
 import com.refsul.inventory_refsul.models.PersonalInformation;
 import com.refsul.inventory_refsul.models.Provider;
+import com.refsul.inventory_refsul.view.validators.ItemForm;
+import com.refsul.inventory_refsul.view.validators.validationOptions.EmailValidator;
+import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValidator;
+import com.refsul.inventory_refsul.view.validators.validationOptions.NumberValidator;
+import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -373,18 +378,86 @@ public class UIProvider extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean isValidInput()
+    {
+        ItemForm nameItem = new ItemForm( "Nombre", this.jTextName.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 3, 20 ) );
+
+        ItemForm lastNameItem = new ItemForm( "Apellidos", this.jTextLasName.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 5, 20 ) );
+
+        ItemForm RFCItem = new ItemForm( "RFC", this.jTextRFC.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 13, 13 ) );
+
+        ItemForm addressItem = new ItemForm( "Dirección", this.jTextAddress.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 5, 50 ) );
+
+        ItemForm emailItem = new ItemForm( "Email", this.jTextEmail.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 5, 50 ) )
+                .addValidador( new EmailValidator() );
+
+        ItemForm phoneItem = new ItemForm( "Teléfono", this.jTextPhone.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new NumberValidator() )
+                .addValidador( new LengthValidator( 10, 12 ) );
+
+        if( !nameItem.isValid() ) {
+            nameItem.printMessage();
+            this.jTextName.requestFocus();
+            return false;
+        }
+
+        if( !lastNameItem.isValid() ) {
+            lastNameItem.printMessage();
+            this.jTextLasName.requestFocus();
+            return false;
+        }
+
+        if( !RFCItem.isValid() ) {
+            RFCItem.printMessage();
+            this.jTextRFC.requestFocus();
+            return false;
+        }
+
+        if( !addressItem.isValid() ) {
+            addressItem.printMessage();
+            this.jTextAddress.requestFocus();
+            return false;
+        }
+
+        if( !emailItem.isValid() ) {
+            emailItem.printMessage();
+            this.jTextEmail.requestFocus();
+            return false;
+        }
+
+        if( !phoneItem.isValid() ) {
+            phoneItem.printMessage();
+            this.jTextPhone.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
     private void buttonAddActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         this.idProvider = 0;
         this.buildProvider();
 
-        if( this.providerController.createProvider( this.provider ) ) {
-            this.completeAddAction();
-            JOptionPane.showMessageDialog( null, "Proveedor agregado correctamente",
-                    "Proveedor agregado", JOptionPane.INFORMATION_MESSAGE );
-        } else {
-            JOptionPane.showMessageDialog( null, "Error al agregar nuevo proveedor",
-                    "Error al agregar", JOptionPane.WARNING_MESSAGE );
+        if( this.isValidInput() ) {
+            if( this.providerController.createProvider( this.provider ) ) {
+                this.completeAddAction();
+                JOptionPane.showMessageDialog( null, "Proveedor agregado correctamente",
+                        "Proveedor agregado", JOptionPane.INFORMATION_MESSAGE );
+            } else {
+                JOptionPane.showMessageDialog( null, "Error al agregar nuevo proveedor",
+                        "Error al agregar", JOptionPane.WARNING_MESSAGE );
+            }
         }
     }
 
@@ -417,21 +490,23 @@ public class UIProvider extends javax.swing.JInternalFrame {
 
     private void buttonUpdateActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        int confirm = JOptionPane.showConfirmDialog( null, "¿Desea guardar cambios?\n" +
-                        "Los datos del proveedor se modificaran" , "Actualizando Proveedor",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
-
         this.buildProvider();
 
-        if( confirm == 0 )
-        {
-            if( this.providerController.updateProvider( this.provider ) ) {
-                this.completeDeleteOrUpdateAction();
-                JOptionPane.showMessageDialog( null, "Proveedor actualizado correctamente",
-                        "Proveedor actualizado", JOptionPane.INFORMATION_MESSAGE );
-            } else {
-                JOptionPane.showMessageDialog( null, "Error al actualizar proveedor",
-                        "Error al actualizar", JOptionPane.WARNING_MESSAGE );
+        if( this.isValidInput() ) {
+            int confirm = JOptionPane.showConfirmDialog( null, "¿Desea guardar cambios?\n" +
+                            "Los datos del proveedor se modificaran" , "Actualizando Proveedor",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+
+            if( confirm == 0 )
+            {
+                if( this.providerController.updateProvider( this.provider ) ) {
+                    this.completeDeleteOrUpdateAction();
+                    JOptionPane.showMessageDialog( null, "Proveedor actualizado correctamente",
+                            "Proveedor actualizado", JOptionPane.INFORMATION_MESSAGE );
+                } else {
+                    JOptionPane.showMessageDialog( null, "Error al actualizar proveedor",
+                            "Error al actualizar", JOptionPane.WARNING_MESSAGE );
+                }
             }
         }
     }

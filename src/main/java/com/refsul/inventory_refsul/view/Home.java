@@ -5,7 +5,7 @@ import com.refsul.inventory_refsul.view.internalsFrame.UIUnitMeasurement;
 import com.refsul.inventory_refsul.view.internalsFrame.UIProduct;
 import com.refsul.inventory_refsul.view.internalsFrame.UICustomer;
 import com.refsul.inventory_refsul.view.internalsFrame.UIProvider;
-import com.refsul.inventory_refsul.view.internalsFrame.UISelller;
+import com.refsul.inventory_refsul.view.internalsFrame.UISeller;
 import com.refsul.inventory_refsul.view.internalsFrame.UIPaymentMethod;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -272,7 +272,7 @@ public class Home extends javax.swing.JFrame {
 
     private void ItemSellersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UISelller seller = new UISelller();
+        UISeller seller = new UISeller();
         this.showWindows( seller );
     }
 

@@ -2,7 +2,7 @@ package com.refsul.inventory_refsul.view.validators.validationOptions;
 
 public class EmailValidator extends Validator
 {
-    protected String message = "El campo %s formato del correo es inválido";
+    protected String message = "El formato del %s es inválido";
     private final static String EMAIL_REGEX = "^(.+)@(.+)$";
 
     @Override

@@ -2,7 +2,8 @@ package com.refsul.inventory_refsul.view.validators.validationOptions;
 
 public class NumberValidator extends Validator
 {
-    protected String message = "El campo %s debe ser un número";
+    protected String message = "El campo %s debe ser un número valido";
+    private final static String NUMBER_REGEX = "[+-]?\\d*(\\.\\d+)?";
 
     @Override
     public String getMessage()
@@ -19,11 +20,6 @@ public class NumberValidator extends Validator
     @Override
     public boolean isValid( String value )
     {
-        try {
-            Integer.parseInt( value );
-            return true;
-        } catch ( NumberFormatException e ) {
-            return false;
-        }
+        return value.matches( NUMBER_REGEX );
     }
 }
