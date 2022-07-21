@@ -2,6 +2,9 @@ package com.refsul.inventory_refsul.view.internalsFrame;
 
 import com.refsul.inventory_refsul.controllers.UnitMeasurementController;
 import com.refsul.inventory_refsul.models.UnitMeasurement;
+import com.refsul.inventory_refsul.view.validators.ItemForm;
+import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValidator;
+import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -312,18 +315,35 @@ public class UIUnitMeasurement extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean isValidInput()
+    {
+        ItemForm description = new ItemForm( "Descripción", this.jTextDescription.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 3, 20 ));
+
+        if( !description.isValid() ) {
+            description.printMessage();
+            this.jTextDescription.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
     private void buttonAddActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         this.idUnitMeasurement = 0;
         this.buildUnitMeasurement();
 
-        if( this.unitMeasurementController.createUnitMeasurement( this.unitMeasurement ) ) {
-            this.completeAddAction();
-            JOptionPane.showMessageDialog( null, "Método de pago agregado correctamente",
-                    "Método de pago agregado", JOptionPane.INFORMATION_MESSAGE );
-        } else {
-            JOptionPane.showMessageDialog( null, "Error al agregar nuevo Método de pago",
-                    "Error al agregar", JOptionPane.WARNING_MESSAGE );
+        if( this.isValidInput() ) {
+            if( this.unitMeasurementController.createUnitMeasurement( this.unitMeasurement ) ) {
+                this.completeAddAction();
+                JOptionPane.showMessageDialog( null, "Método de pago agregado correctamente",
+                        "Método de pago agregado", JOptionPane.INFORMATION_MESSAGE );
+            } else {
+                JOptionPane.showMessageDialog( null, "Error al agregar nuevo Método de pago",
+                        "Error al agregar", JOptionPane.WARNING_MESSAGE );
+            }
         }
     }
 
@@ -350,21 +370,23 @@ public class UIUnitMeasurement extends javax.swing.JInternalFrame {
 
     private void buttonUpdateActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        int confirm = JOptionPane.showConfirmDialog( null, "¿Desea guardar cambios?\n" +
-                        "Los datos del Método de pago se modificaran" , "Actualizando Método de pago",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
-
         this.buildUnitMeasurement();
 
-        if( confirm == 0 )
-        {
-            if( this.unitMeasurementController.updateUnitMeasurement( this.unitMeasurement ) ) {
-                this.completeDeleteOrUpdateAction();
-                JOptionPane.showMessageDialog( null, "Método de pago actualizado correctamente",
-                        "Método de pago actualizado", JOptionPane.INFORMATION_MESSAGE );
-            } else {
-                JOptionPane.showMessageDialog( null, "Error al actualizar Método de pago",
-                        "Error al actualizar", JOptionPane.WARNING_MESSAGE );
+        if( this.isValidInput() ) {
+            int confirm = JOptionPane.showConfirmDialog( null, "¿Desea guardar cambios?\n" +
+                            "Los datos del Método de pago se modificaran" , "Actualizando Método de pago",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+
+            if( confirm == 0 )
+            {
+                if( this.unitMeasurementController.updateUnitMeasurement( this.unitMeasurement ) ) {
+                    this.completeDeleteOrUpdateAction();
+                    JOptionPane.showMessageDialog( null, "Método de pago actualizado correctamente",
+                            "Método de pago actualizado", JOptionPane.INFORMATION_MESSAGE );
+                } else {
+                    JOptionPane.showMessageDialog( null, "Error al actualizar Método de pago",
+                            "Error al actualizar", JOptionPane.WARNING_MESSAGE );
+                }
             }
         }
     }

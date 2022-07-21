@@ -138,23 +138,25 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private boolean validateFiled()
+    private boolean isValidInput()
     {
-        ItemForm userNameItem = new ItemForm( "Nombre de Usuario", jTextUserName.getText() )
+        ItemForm userNameItem = new ItemForm( "Nombre de Usuario", this.jTextUserName.getText() )
                 .addValidador( new RequiredValidator() )
                 .addValidador( new LengthValidator( 5, 15 ) );
 
-        ItemForm passwordItem = new ItemForm( "Contraseña", jTextPassword.getText() )
+        ItemForm passwordItem = new ItemForm( "Contraseña", this.jTextPassword.getText() )
                 .addValidador( new RequiredValidator() )
                 .addValidador( new LengthValidator( 6, 15 ) );
 
         if( !userNameItem.isValid() ) {
             userNameItem.printMessage();
+            this.jTextUserName.requestFocus();
             return false;
         }
 
         if( !passwordItem.isValid() ) {
             passwordItem.printMessage();
+            this.jTextPassword.requestFocus();
             return false;
         }
 
@@ -166,7 +168,7 @@ public class Login extends javax.swing.JFrame {
         String userName = jTextUserName.getText();
         String password = jTextPassword.getText();
 
-        if( this.validateFiled() ) {
+        if( this.isValidInput() ) {
             try {
                 boolean response = this.sellerController.login( userName, password );
 
