@@ -1,12 +1,16 @@
 package com.refsul.inventory_refsul.view;
 
 import com.refsul.inventory_refsul.controllers.SellerController;
+import com.refsul.inventory_refsul.view.validators.ItemForm;
+import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValidator;
+import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
 import javax.swing.*;
 import java.sql.SQLException;
 
 public class Login extends javax.swing.JFrame {
     SellerController sellerController;
+
     public Login() {
         initComponents();
         this.setLocationRelativeTo( null );
@@ -134,29 +138,51 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean validateFiled()
+    {
+        ItemForm userNameItem = new ItemForm( "Nombre de Usuario", jTextUserName.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 5, 15 ) );
+
+        ItemForm passwordItem = new ItemForm( "Contraseña", jTextPassword.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 6, 15 ) );
+
+        if( !userNameItem.isValid() ) {
+            userNameItem.printMessage();
+            return false;
+        }
+
+        if( !passwordItem.isValid() ) {
+            passwordItem.printMessage();
+            return false;
+        }
+
+        return true;
+    }
+
     private void jButtonLoginActionPerformed( java.awt.event.ActionEvent evt )
     {
         String userName = jTextUserName.getText();
         String password = jTextPassword.getText();
 
-        try
-        {
-            boolean response = this.sellerController.login( userName, password );
+        if( this.validateFiled() ) {
+            try {
+                boolean response = this.sellerController.login( userName, password );
 
-            if( response )
-            {
-                Home home = new Home();
-                home.setVisible( true );
+                if( response )
+                {
+                    Home home = new Home();
+                    home.setVisible( true );
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog( null, "Incorrect username and/or password",
+                            "Error Login", JOptionPane.WARNING_MESSAGE );
+                }
+            } catch ( SQLException ex ) {
+                throw new RuntimeException( ex );
             }
-            else
-            {
-                JOptionPane.showMessageDialog( null, "Incorrect username and/or password",
-                        "Error Login", JOptionPane.WARNING_MESSAGE );
-            }
-        }
-        catch ( SQLException ex )
-        {
-            throw new RuntimeException( ex );
         }
     }
     
