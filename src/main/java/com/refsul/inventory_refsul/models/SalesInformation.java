@@ -1,35 +1,39 @@
 package com.refsul.inventory_refsul.models;
 
-public class SaleInformation
+public class SalesInformation
 {
-    private Integer idInformation;
+    private Integer idSalesInformation;
     private Integer quantityProduct;
-    private double totalPrice;
+    private Double totalPrice;
     private Integer idSale;
     private Integer idProduct;
 
-    public Integer getIdInformation()
+    public Integer getIdSalesInformation()
     {
-        return idInformation;
+        return idSalesInformation;
     }
-    public void setIdInformation( Integer idInformation )
+
+    public void setIdSalesInformation( Integer idSalesInformation )
     {
-        this.idInformation = idInformation;
+        this.idSalesInformation = idSalesInformation;
     }
+
     public Integer getQuantityProduct()
     {
         return quantityProduct;
     }
+
     public void setQuantityProduct( Integer quantityProduct )
     {
         this.quantityProduct = quantityProduct;
     }
 
-    public double getTotalPrice()
+    public Double getTotalPrice()
     {
         return totalPrice;
     }
-    public void setTotalPrice( double totalPrice )
+
+    public void setTotalPrice( Double totalPrice )
     {
         this.totalPrice = totalPrice;
     }
@@ -38,6 +42,7 @@ public class SaleInformation
     {
         return idSale;
     }
+
     public void setIdSale( Integer idSale )
     {
         this.idSale = idSale;
@@ -47,6 +52,7 @@ public class SaleInformation
     {
         return idProduct;
     }
+
     public void setIdProduct( Integer idProduct )
     {
         this.idProduct = idProduct;

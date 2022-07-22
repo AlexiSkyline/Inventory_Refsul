@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class SellerRepositoryImpl implements SellerRepository<Seller>
+public class SellerRepositoryImpl implements SellerRepository
 {
     private Connection connection;
 

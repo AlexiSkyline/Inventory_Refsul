@@ -1,31 +1,15 @@
 package com.refsul.inventory_refsul.models;
 
-import java.util.Date;
-
-public class Sale
+public class Sales
 {
     private Integer idSale;
-    private Date date;
+    private String date;
     private String folio;
-    private double total;
+    private Double total;
     private boolean status;
     private Integer idSeller;
     private Integer idCustomer;
     private Integer idPaymentMethod;
-
-    public Sale() {}
-
-    public Sale( Integer idSale, Date date, String folio, double total, boolean status, Integer idSeller, Integer idCustomer, Integer idPaymentMethod )
-    {
-        this.idSale = idSale;
-        this.date = date;
-        this.folio = folio;
-        this.total = total;
-        this.status = status;
-        this.idSeller = idSeller;
-        this.idCustomer = idCustomer;
-        this.idPaymentMethod = idPaymentMethod;
-    }
 
     public Integer getIdSale()
     {
@@ -37,12 +21,12 @@ public class Sale
         this.idSale = idSale;
     }
 
-    public Date getDate()
+    public String getDate()
     {
         return date;
     }
 
-    public void setDate( Date date )
+    public void setDate( String date )
     {
         this.date = date;
     }
@@ -57,12 +41,12 @@ public class Sale
         this.folio = folio;
     }
 
-    public double getTotal()
+    public Double getTotal()
     {
         return total;
     }
 
-    public void setTotal( double total )
+    public void setTotal( Double total )
     {
         this.total = total;
     }
