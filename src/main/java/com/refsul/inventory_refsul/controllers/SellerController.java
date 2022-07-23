@@ -1,5 +1,6 @@
 package com.refsul.inventory_refsul.controllers;
 
+import com.refsul.inventory_refsul.models.Customer;
 import com.refsul.inventory_refsul.services.implementService.PersonalInformationServiceImpl;
 import com.refsul.inventory_refsul.services.implementService.SellerServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
@@ -48,6 +49,11 @@ public class SellerController
     public List<Seller> getSellers() throws SQLException
     {
         return ( List<Seller> ) this.sellerService.findAll();
+    }
+
+    public Optional<Seller> getSellerById(int id ) throws SQLException
+    {
+        return this.sellerService.findById( id );
     }
 
     public boolean updateSeller( Seller seller )

@@ -44,6 +44,11 @@ public class CustomerController
         return ( List<Customer> ) this.customerService.findAll();
     }
 
+    public Optional<Customer> getCustomerById( int id ) throws SQLException
+    {
+        return this.customerService.findById( id );
+    }
+
     public boolean updateCustomer( Customer customer )
     {
         try {

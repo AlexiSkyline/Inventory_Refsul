@@ -1,12 +1,7 @@
 package com.refsul.inventory_refsul.view;
 
-import com.refsul.inventory_refsul.view.internalsFrame.UIBrand;
-import com.refsul.inventory_refsul.view.internalsFrame.UIUnitMeasurement;
-import com.refsul.inventory_refsul.view.internalsFrame.UIProduct;
-import com.refsul.inventory_refsul.view.internalsFrame.UICustomer;
-import com.refsul.inventory_refsul.view.internalsFrame.UIProvider;
-import com.refsul.inventory_refsul.view.internalsFrame.UISeller;
-import com.refsul.inventory_refsul.view.internalsFrame.UIPaymentMethod;
+import com.refsul.inventory_refsul.view.internalsFrame.*;
+
 import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JInternalFrame;
@@ -18,7 +13,7 @@ public class Home extends javax.swing.JFrame {
         this.setResizable( false );
     }
    
-    public void showWindows(JInternalFrame child ) {
+    public static void showWindows(JInternalFrame child ) {
         jDesktopPaneHome.add( child );
         Dimension size = child.getSize();
         Dimension dimension = jDesktopPaneHome.getSize();
@@ -110,6 +105,15 @@ public class Home extends javax.swing.JFrame {
         ItemMakeSale.setText("  Generar Ventas");
         ItemMakeSale.setMargin(new java.awt.Insets(10, 15, 10, 10));
         ItemMakeSale.setPreferredSize(new java.awt.Dimension(220, 50));
+        ItemMakeSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    ItemMakeSaleActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         optionSales.add(ItemMakeSale);
         optionSales.add(jSeparator2);
 
@@ -270,6 +274,12 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ItemMakeSaleActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        UIGenerateSale sale = new UIGenerateSale();
+        this.showWindows( sale );
+    }
+
     private void ItemSellersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         UISeller seller = new UISeller();
@@ -323,7 +333,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem ItemSalesDetails;
     private javax.swing.JMenuItem ItemSellers;
     private javax.swing.JMenuItem ItemUnitsMeasurements;
-    private javax.swing.JDesktopPane jDesktopPaneHome;
+    private static javax.swing.JDesktopPane jDesktopPaneHome;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;

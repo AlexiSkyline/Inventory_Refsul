@@ -3,7 +3,7 @@ package com.refsul.inventory_refsul.services.implementService;
 import com.refsul.inventory_refsul.models.Sales;
 import com.refsul.inventory_refsul.repository.implementsRepository.SalesRepositoryImpl;
 import com.refsul.inventory_refsul.repository.interfaces.SalesRepository;
-import com.refsul.inventory_refsul.services.interfaces.SalesService;
+import com.refsul.inventory_refsul.services.interfaces.SaleService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
 import java.sql.Connection;
@@ -11,11 +11,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class SalesServiceImpl implements SalesService
+public class SaleServiceImpl implements SaleService
 {
     private SalesRepository repository;
 
-    public SalesServiceImpl()
+    public SaleServiceImpl()
     {
         this.repository = new SalesRepositoryImpl();
     }
