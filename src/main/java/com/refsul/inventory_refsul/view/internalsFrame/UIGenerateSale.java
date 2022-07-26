@@ -790,7 +790,8 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         this.cleanTableShoppingCart();
     }
 
-    public Sales buildSale() {
+    public Sales buildSale()
+    {
         this.idPaymentMethod = this.paymentMethodList.get( this.jComboBoxPaymentMethods.getSelectedIndex() - 1 ).getIdPaymentMethod();
 
         Sales sales = new Sales();
