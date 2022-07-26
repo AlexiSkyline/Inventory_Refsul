@@ -18,9 +18,6 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class UIGenerateSale extends javax.swing.JInternalFrame {
-    private Sales sales;
-    private Customer customer;
-    private Seller seller;
     private Product product;
 
     private SalesController salesController;
@@ -28,16 +25,17 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
     private SellerController sellerController;
     private ProductController productController;
     private PaymentMethodController paymentMethodController;
-    List<PaymentMethod> paymentMethodList;
+    private List<PaymentMethod> paymentMethodList;
 
     private int idCustomer;
     private int idSeller;
     private int idProduct;
+    private int idPaymentMethod;
 
-    DefaultTableModel tableShoppingCart;
-    double price;
-    double totalPrice;
-    int quantityProduct;
+    private DefaultTableModel tableShoppingCart;
+    private double price;
+    private double totalPrice;
+    private int quantityProduct;
     private static int lastIdItem;
 
     public UIGenerateSale() throws SQLException {
@@ -58,6 +56,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         this.idCustomer = 0;
         this.idSeller = 0;
         this.idProduct = 0;
+        this.idPaymentMethod = 0;
 
         this.tableShoppingCart = new DefaultTableModel();
         this.lastIdItem = 0;
@@ -519,7 +518,11 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         jButtonGenerateSale.setText("Generar Venta");
         jButtonGenerateSale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGenerateSaleActionPerformed(evt);
+                try {
+                    jButtonGenerateSaleActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -667,7 +670,6 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
             if( findCustomer.isPresent() ){
                 this.jTextCustomerName.setText( findCustomer.get().getPersonalInformation().getName() + " " + findCustomer.get().getPersonalInformation().getLastName() );
                 this.idCustomer = findCustomer.get().getIdCustomer();
-                this.customer = findCustomer.get();
                 this.jTextIdSeller.requestFocus();
             } else {
                 int confirmDialog = JOptionPane.showConfirmDialog(this, "El cliente no Existe, Desea Registrarlo?", "Error al Buscar", JOptionPane.WARNING_MESSAGE );
@@ -690,7 +692,6 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
             if( findSeller.isPresent() ){
                 this.jTextSellerName.setText( findSeller.get().getPersonalInformation().getName() + " " + findSeller.get().getPersonalInformation().getLastName() );
                 this.idSeller = findSeller.get().getIdSeller();
-                this.seller = findSeller.get();
                 this.jTextIdProduct.requestFocus();
             } else {
                 int confirmDialog = JOptionPane.showConfirmDialog(this, "El Vendedor no Existe, Desea Registrarlo?", "Error al Buscar", JOptionPane.WARNING_MESSAGE );
@@ -767,13 +768,40 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         this.jSpinnerQuantityProduct.setValue( 0 );
     }
 
-    private void jButtonGenerateSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonGenerateSaleActionPerformed
+    private void jButtonGenerateSaleActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
+    {
+        if( this.isValidPaymentMethod() && this.isValidCustomerInput() && this.isValidSellerInput() && this.isValidShoppingCar() ) {
+            boolean response = this.salesController.createSale( this.buildSale() );
+            if( response ) {
+                this.completeAddAction();
+                JOptionPane.showMessageDialog( null, "Venta realizada correctamente",
+                        "Venta realizada", JOptionPane.INFORMATION_MESSAGE );
+            } else {
+                JOptionPane.showMessageDialog( null, "Error al realizar una Venta",
+                        "Error al Vender", JOptionPane.WARNING_MESSAGE );
+            }
+        }
+    }
 
-    private void jButtonCancelSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelSaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCancelSaleActionPerformed
+    private void jButtonCancelSaleActionPerformed( java.awt.event.ActionEvent evt )
+    {
+        this.cleanFields();
+        this.cleanTableShoppingCart();
+    }
+
+    public Sales buildSale() {
+        this.idPaymentMethod = this.paymentMethodList.get( this.jComboBoxPaymentMethods.getSelectedIndex() - 1 ).getIdPaymentMethod();
+
+        Sales sales = new Sales();
+        sales.setDate( this.jTextDate.getText() );
+        sales.setFolio( this.jTextFolio.getText() );
+        sales.setTotal( this.totalPrice );
+        sales.setIdSeller( this.idSeller );
+        sales.setIdCustomer( this.idCustomer );
+        sales.setIdPaymentMethod( this.idPaymentMethod );
+
+        return sales;
+    }
 
     private boolean isValidCustomerInput()
     {
@@ -784,6 +812,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
 
         if( !idCustomerItem.isValid() ) {
             idCustomerItem.printMessage();
+            this.jTextIdCustomer.requestFocus();
             return false;
         }
         return true;
@@ -798,6 +827,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
 
         if( !idSellerItem.isValid() ) {
             idSellerItem.printMessage();
+            this.jTextIdSeller.requestFocus();
             return false;
         }
         return true;
@@ -812,6 +842,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
 
         if( !idProductItem.isValid() ) {
             idProductItem.printMessage();
+            this.jTextIdProduct.requestFocus();
             return false;
         }
         return true;
@@ -820,15 +851,75 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
     private boolean isValidQuantityProductInput()
     {
         String idProduct = this.jSpinnerQuantityProduct.getValue().toString();
-        ItemForm idProductItem = new ItemForm( "Id Producto", idProduct )
+        ItemForm idProductItem = new ItemForm( "Cantidad Producto", idProduct )
                 .addValidador( new RequiredValidator() )
                 .addValidador( new NumberValidator() );
 
         if( !idProductItem.isValid() ) {
             idProductItem.printMessage();
+            this.jSpinnerQuantityProduct.requestFocus();
             return false;
         }
         return true;
+    }
+
+    private boolean isValidPaymentMethod()
+    {
+        String idPaymentMethod = ( this.jComboBoxPaymentMethods.getSelectedIndex() == 0 ) ? "" : this.jComboBoxPaymentMethods.getSelectedItem().toString();
+        ItemForm idPaymentMethodItem = new ItemForm( "Método de Pago", idPaymentMethod )
+                .addValidador( new RequiredValidator() );
+
+        if( !idPaymentMethodItem.isValid() ) {
+            idPaymentMethodItem.printMessage();
+            this.jComboBoxPaymentMethods.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidShoppingCar()
+    {
+        if( this.jTableShoppingCart.getRowCount() == 0 ) {
+            JOptionPane.showMessageDialog( null, "Agregue productos al Carrito", "Agregue Productos", JOptionPane.WARNING_MESSAGE );
+            return false;
+        }
+        return true;
+    }
+
+    private void completeAddAction() throws SQLException
+    {
+        this.idCustomer = 0;
+        this.idSeller = 0;
+        this.idProduct = 0;
+        this.idPaymentMethod = 0;
+
+        this.cleanFields();
+        this.cleanTableShoppingCart();
+        this.generateFolio();
+    }
+
+    private void cleanFields()
+    {
+        this.jTextIdCustomer.setText( "" );
+        this.jTextIdSeller.setText( "" );
+        this.jTextIdProduct.setText( "" );
+        this.jTextPrice.setText( "" );
+        this.jSpinnerQuantityProduct.setValue( 0 );
+
+        this.jTextCustomerName.setText( "" );
+        this.jTextSellerName.setText( "" );
+        this.jTextProductName.setText( "" );
+        this.jTextStock.setText( "" );
+
+        this.jComboBoxPaymentMethods.setSelectedItem( this.jComboBoxPaymentMethods.getItemAt( 0 ) );
+    }
+
+    private void cleanTableShoppingCart()
+    {
+        for( int i = 0; i < this.tableShoppingCart.getRowCount(); i++ ) {
+            this.tableShoppingCart.removeRow( i );
+            i = i - 1;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
