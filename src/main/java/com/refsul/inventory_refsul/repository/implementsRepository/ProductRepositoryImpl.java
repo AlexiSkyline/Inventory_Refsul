@@ -2,13 +2,14 @@ package com.refsul.inventory_refsul.repository.implementsRepository;
 
 import com.refsul.inventory_refsul.models.Product;
 import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
+import com.refsul.inventory_refsul.repository.interfaces.ProductRepository;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-public class ProductRepositoryImpl implements CrudRepository<Product>
+public class ProductRepositoryImpl implements ProductRepository
 {
     private Connection connection;
 
@@ -73,7 +74,7 @@ public class ProductRepositoryImpl implements CrudRepository<Product>
     @Override
     public void update( Product product ) throws SQLException
     {
-        String sqlQuery = "UPDATE products SET Name = ?, Description = ?, Price = ?, Stock = ?, Unit_Measurement_Id = ?, Brand_Id = ?, Provider_Id = ? WHERE Id= ?;";
+        String sqlQuery = "UPDATE products SET Name = ?, Description = ?, Price = ?, Stock = ?, Unit_Measurement_Id = ?, Brand_Id = ?, Provider_Id = ? WHERE Id = ?;";
 
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
@@ -89,6 +90,19 @@ public class ProductRepositoryImpl implements CrudRepository<Product>
         try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
         {
             preparedStatement.setInt( 1, id );
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    @Override
+    public void updateProductStock( int id, int quantity ) throws SQLException
+    {
+        String sqlQuery = "UPDATE products SET Stock = ? WHERE Id = ?;";
+
+        try ( PreparedStatement preparedStatement = this.connection.prepareStatement( sqlQuery ) )
+        {
+            preparedStatement.setInt( 1, quantity );
+            preparedStatement.setInt( 2, id );
             preparedStatement.executeUpdate();
         }
     }

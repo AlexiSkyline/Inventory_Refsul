@@ -68,4 +68,15 @@ public class ProductController
             return false;
         }
     }
+
+    public boolean updateProductStock( int id, int quantity )
+    {
+        try {
+            this.service.updateProductStock( id, quantity );
+            return true;
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

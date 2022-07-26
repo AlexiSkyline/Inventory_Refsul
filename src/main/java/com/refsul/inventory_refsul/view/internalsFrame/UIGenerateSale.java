@@ -7,6 +7,7 @@ package com.refsul.inventory_refsul.view.internalsFrame;
 
 import com.refsul.inventory_refsul.controllers.*;
 import com.refsul.inventory_refsul.models.*;
+import com.refsul.inventory_refsul.repository.interfaces.ProductRepository;
 import com.refsul.inventory_refsul.view.Home;
 import com.refsul.inventory_refsul.view.validators.ItemForm;
 import com.refsul.inventory_refsul.view.validators.validationOptions.NumberValidator;
@@ -735,6 +736,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
             this.quantityProduct = ( int ) this.jSpinnerQuantityProduct.getValue();
 
             if( stock > 0 && this.quantityProduct > 0 && this.quantityProduct <= stock ) {
+                this.cleanFieldProduct();
                 this.tableShoppingCart = ( DefaultTableModel ) this.jTableShoppingCart.getModel();
                 this.idProduct = this.product.getIdProduct();
                 String productName = this.product.getName();
@@ -763,9 +765,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
 
     private void jButtonCleanActionPerformed( java.awt.event.ActionEvent evt )
     {
-        this.jTextIdProduct.setText( "" );
-        this.jTextPrice.setText( "" );
-        this.jSpinnerQuantityProduct.setValue( 0 );
+        this.cleanFieldProduct();
     }
 
     private void jButtonGenerateSaleActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
@@ -773,6 +773,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         if( this.isValidPaymentMethod() && this.isValidCustomerInput() && this.isValidSellerInput() && this.isValidShoppingCar() ) {
             boolean response = this.salesController.createSale( this.buildSale() );
             if( response ) {
+                this.discountStockProducts();
                 this.completeAddAction();
                 JOptionPane.showMessageDialog( null, "Venta realizada correctamente",
                         "Venta realizada", JOptionPane.INFORMATION_MESSAGE );
@@ -902,17 +903,20 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
     {
         this.jTextIdCustomer.setText( "" );
         this.jTextIdSeller.setText( "" );
+        this.cleanFieldProduct();
+        this.jTextCustomerName.setText( "" );
+        this.jTextSellerName.setText( "" );
+        this.jTextTotal.setText( "$0.0" );
+        this.jComboBoxPaymentMethods.setSelectedItem( this.jComboBoxPaymentMethods.getItemAt( 0 ) );
+    }
+
+    private void cleanFieldProduct()
+    {
         this.jTextIdProduct.setText( "" );
         this.jTextPrice.setText( "" );
         this.jSpinnerQuantityProduct.setValue( 0 );
-
-        this.jTextCustomerName.setText( "" );
-        this.jTextSellerName.setText( "" );
         this.jTextProductName.setText( "" );
         this.jTextStock.setText( "" );
-        this.jTextTotal.setText( "$0.0" );
-
-        this.jComboBoxPaymentMethods.setSelectedItem( this.jComboBoxPaymentMethods.getItemAt( 0 ) );
     }
 
     private void cleanTableShoppingCart()
@@ -920,6 +924,17 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         for( int i = 0; i < this.tableShoppingCart.getRowCount(); i++ ) {
             this.tableShoppingCart.removeRow( i );
             i = i - 1;
+        }
+    }
+
+    private void discountStockProducts() throws SQLException
+    {
+        for( int i = 0; i < this.jTableShoppingCart.getRowCount(); i++ ) {
+            int idProduct = Integer.parseInt( this.jTableShoppingCart.getValueAt( i, 1 ).toString() );
+            int quantity = Integer.parseInt( this.jTableShoppingCart.getValueAt( i, 3 ).toString() );
+            Product product = this.productController.getProductById( idProduct ).get();
+            int newQuantity = product.getStock() - quantity;
+            this.productController.updateProductStock( idProduct, newQuantity );
         }
     }
 
