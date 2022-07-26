@@ -8,6 +8,10 @@ import com.refsul.inventory_refsul.models.Product;
 import com.refsul.inventory_refsul.controllers.BrandController;
 import com.refsul.inventory_refsul.models.Provider;
 import com.refsul.inventory_refsul.models.UnitMeasurement;
+import com.refsul.inventory_refsul.view.validators.ItemForm;
+import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValidator;
+import com.refsul.inventory_refsul.view.validators.validationOptions.NumberValidator;
+import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -417,6 +421,74 @@ public class UIProduct extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public boolean isValidInput()
+    {
+        ItemForm nameItem = new ItemForm( "Nombre", this.jTextName.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 3, 15 ) );
+
+        ItemForm descriptionItem = new ItemForm( "Descripción", this.jTextDescription.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new LengthValidator( 5, 20 ) );
+
+        ItemForm priceItem = new ItemForm( "Precio", this.jTextPrice.getText() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new NumberValidator() );
+
+        ItemForm stockItem = new ItemForm( "Stock", this.jSpinnerStock.getValue().toString() )
+                .addValidador( new RequiredValidator() )
+                .addValidador( new NumberValidator() );
+
+        String idUnitMeasurement = ( this.jComboBoxUnitMeasurement.getSelectedIndex() == 0 ) ? "" : this.jComboBoxUnitMeasurement.getSelectedItem().toString();
+        ItemForm idUnitMeasurementItem = new ItemForm( "Unidad de Medida", idUnitMeasurement )
+                .addValidador( new RequiredValidator() );
+
+        String idBrand = ( this.jComboBoxBrands.getSelectedIndex() == 0 ) ? "" : this.jComboBoxBrands.getSelectedItem().toString();
+        ItemForm idBrandItem = new ItemForm( "Marca", idBrand )
+                .addValidador( new RequiredValidator() );
+
+        String idProvider = ( this.jComboBoxProviders.getSelectedIndex() == 0 ) ? "" : this.jComboBoxProviders.getSelectedItem().toString();
+        ItemForm idProviderItem = new ItemForm( "Marca", idProvider )
+                .addValidador( new RequiredValidator() );
+
+        if( !nameItem.isValid() ) {
+            nameItem.printMessage();
+            return false;
+        }
+
+        if( !descriptionItem.isValid() ) {
+            descriptionItem.printMessage();
+            return false;
+        }
+
+        if( !priceItem.isValid() ) {
+            priceItem.printMessage();
+            return false;
+        }
+
+        if( !stockItem.isValid() ) {
+            stockItem.printMessage();
+            return false;
+        }
+
+        if( !idUnitMeasurementItem.isValid() ) {
+            idUnitMeasurementItem.printMessage();
+            return false;
+        }
+
+        if( !idBrandItem.isValid() ) {
+            idBrandItem.printMessage();
+            return false;
+        }
+
+        if( !idProviderItem.isValid() ) {
+            idProviderItem.printMessage();
+            return false;
+        }
+
+        return true;
+    }
+
     private void showUnitMeasurementInCombobox() throws SQLException
     {
         List<UnitMeasurement> unitMeasurementsDB = this.unitMeasurementController.getUnitMeasurements();
@@ -441,15 +513,17 @@ public class UIProduct extends javax.swing.JInternalFrame {
     private void buttonAddActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         this.idProduct = 0;
-        this.buildProduct();
 
-        if( this.productController.createProduct( this.product ) ) {
-            this.completeAddAction();
-            JOptionPane.showMessageDialog( null, "Producto agregado correctamente",
-                    "Producto agregado", JOptionPane.INFORMATION_MESSAGE );
-        } else {
-            JOptionPane.showMessageDialog( null, "Error al agregar nuevo producto",
-                    "Error al agregar", JOptionPane.WARNING_MESSAGE );
+        if( this.isValidInput() ) {
+            this.buildProduct();
+            if( this.productController.createProduct( this.product ) ) {
+                this.completeAddAction();
+                JOptionPane.showMessageDialog( null, "Producto agregado correctamente",
+                        "Producto agregado", JOptionPane.INFORMATION_MESSAGE );
+            } else {
+                JOptionPane.showMessageDialog( null, "Error al agregar nuevo producto",
+                        "Error al agregar", JOptionPane.WARNING_MESSAGE );
+            }
         }
     }
 
@@ -483,21 +557,22 @@ public class UIProduct extends javax.swing.JInternalFrame {
 
     private void buttonUpdateActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        int confirm = JOptionPane.showConfirmDialog( null, "¿Desea guardar cambios?\n" +
-                        "Los datos del producto se modificaran" , "Actualizando Producto",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
+        if( this.isValidInput() ) {
+            this.buildProduct();
+            int confirm = JOptionPane.showConfirmDialog( null, "¿Desea guardar cambios?\n" +
+                            "Los datos del producto se modificaran" , "Actualizando Producto",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE );
 
-        this.buildProduct();
-
-        if( confirm == 0 )
-        {
-            if( this.productController.updateProduct( this.product ) ) {
-                this.completeDeleteOrUpdateAction();
-                JOptionPane.showMessageDialog( null, "Producto actualizado correctamente",
-                        "Producto actualizado", JOptionPane.INFORMATION_MESSAGE );
-            } else {
-                JOptionPane.showMessageDialog( null, "Error al actualizar producto",
-                        "Error al actualizar", JOptionPane.WARNING_MESSAGE );
+            if( confirm == 0 )
+            {
+                if( this.productController.updateProduct( this.product ) ) {
+                    this.completeDeleteOrUpdateAction();
+                    JOptionPane.showMessageDialog( null, "Producto actualizado correctamente",
+                            "Producto actualizado", JOptionPane.INFORMATION_MESSAGE );
+                } else {
+                    JOptionPane.showMessageDialog( null, "Error al actualizar producto",
+                            "Error al actualizar", JOptionPane.WARNING_MESSAGE );
+                }
             }
         }
     }
