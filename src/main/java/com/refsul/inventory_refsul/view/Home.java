@@ -14,7 +14,7 @@ public class Home extends javax.swing.JFrame {
         this.setResizable( false );
     }
    
-    public void showWindows(JInternalFrame child ) {
+    public static void showWindows(JInternalFrame child ) {
         jDesktopPaneHome.add( child );
         Dimension size = child.getSize();
         Dimension dimension = jDesktopPaneHome.getSize();
@@ -277,52 +277,52 @@ public class Home extends javax.swing.JFrame {
 
     private void ItemMakeSaleActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UIGenerateSale sale = new UIGenerateSale();
-        this.showWindows( sale );
+        UIGenerateSaleComponent uiGenerateSaleComponent = DaggerUIGenerateSaleComponent.create();
+        showWindows( uiGenerateSaleComponent.buildUIGenerateSale() );
     }
 
     private void ItemSellersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         SellerComponent sellerComponent = DaggerSellerComponent.create();
-        this.showWindows( sellerComponent.buildUISeller() );
+        showWindows( sellerComponent.buildUISeller() );
     }
 
     private void ItemProvidersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         ProviderComponent providerComponent = DaggerProviderComponent.create();
         UIProvider provider = providerComponent.buildUIProvider();
-        this.showWindows( provider );
+        showWindows( provider );
     }
 
     private void ItemCustomersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         CustomerComponent customerComponent = DaggerCustomerComponent.create();
-        this.showWindows( customerComponent.buildUISeller() );
+        showWindows( customerComponent.buildUISeller() );
     }
 
     private void ItemProductsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         ProductComponent productComponent = DaggerProductComponent.create();
-        this.showWindows( productComponent.buildUIProduct() );
+        showWindows( productComponent.buildUIProduct() );
     }
 
     private void ItemPaymentMethodsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         PaymentMethodComponent paymentMethodComponent = DaggerPaymentMethodComponent.create();
-        this.showWindows( paymentMethodComponent.buildUIPaymentMethod() );
+        showWindows( paymentMethodComponent.buildUIPaymentMethod() );
     }
 
     private void ItemUnitsMeasurementsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         UnitMeasurementComponent unitMeasurementComponent = DaggerUnitMeasurementComponent.create();
-        this.showWindows( unitMeasurementComponent.buildUIUnitMeasurement() );
+        showWindows( unitMeasurementComponent.buildUIUnitMeasurement() );
     }
 
     private void ItemBrandActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
         BrandComponent brandComponent = DaggerBrandComponent.create();
         UIBrand brand = brandComponent.buildUIBrand();
-        this.showWindows( brand );
+        showWindows( brand );
     }
 
     private javax.swing.JMenuItem ItemBrands;
