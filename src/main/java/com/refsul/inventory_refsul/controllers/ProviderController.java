@@ -2,23 +2,24 @@ package com.refsul.inventory_refsul.controllers;
 
 import com.refsul.inventory_refsul.models.Provider;
 import com.refsul.inventory_refsul.services.implementService.PersonalInformationServiceImpl;
-import com.refsul.inventory_refsul.services.implementService.ProviderServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.services.interfaces.ProviderService;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class ProviderController
 {
-    private ProviderService prodiverService;
-    private PersonalInformationService informationService;
+    private final ProviderService providerService;
+    private final PersonalInformationService informationService;
 
-    public ProviderController()
+    @Inject
+    public ProviderController( ProviderService providerService, PersonalInformationService personalInformationService )
     {
-        this.prodiverService = new ProviderServiceImpl();
-        this.informationService = new PersonalInformationServiceImpl();
+        this.providerService = providerService;
+        this.informationService = personalInformationService;
     }
 
     public boolean createProvider( Provider provider )
@@ -29,7 +30,7 @@ public class ProviderController
 
             if( lastId != 0 ) {
                 provider.getPersonalInformation().setIdInformation( lastId );
-                this.prodiverService.create( provider );
+                this.providerService.create( provider );
             }
 
             return true;
@@ -41,19 +42,19 @@ public class ProviderController
 
     public List<Provider> getProviders() throws SQLException
     {
-        return ( List<Provider> ) this.prodiverService.findAll();
+        return ( List<Provider> ) this.providerService.findAll();
     }
 
     public boolean updateProvider( Provider provider )
     {
         try {
-            Optional<Provider> providerOptional = this.prodiverService.findById( provider.getIdProvider() );
+            Optional<Provider> providerOptional = this.providerService.findById( provider.getIdProvider() );
             if( providerOptional.isPresent() ) {
                 Integer idInformation = providerOptional.get().getPersonalInformation().getIdInformation();
                 provider.getPersonalInformation().setIdInformation( idInformation );
 
                 this.informationService.update( provider.getPersonalInformation() );
-                this.prodiverService.update( provider );
+                this.providerService.update( provider );
             }
 
             return providerOptional.isPresent();
@@ -66,11 +67,11 @@ public class ProviderController
     public boolean deleteProvider( int id )
     {
         try {
-            Optional<Provider> providerOptional = this.prodiverService.findById( id );
+            Optional<Provider> providerOptional = this.providerService.findById( id );
             if( providerOptional.isPresent() ) {
                 Integer idInformation = providerOptional.get().getPersonalInformation().getIdInformation();
 
-                this.prodiverService.delete( providerOptional.get().getIdProvider() );
+                this.providerService.delete( providerOptional.get().getIdProvider() );
                 this.informationService.delete( idInformation );
             }
 

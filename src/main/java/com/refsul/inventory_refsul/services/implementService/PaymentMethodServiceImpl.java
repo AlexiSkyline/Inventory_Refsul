@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.services.interfaces.PaymentMethodService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +14,12 @@ import java.util.Optional;
 
 public class PaymentMethodServiceImpl implements PaymentMethodService
 {
-    private CrudRepository repository;
+    private final CrudRepository<PaymentMethod> repository;
 
-    public PaymentMethodServiceImpl()
+    @Inject
+    public PaymentMethodServiceImpl( CrudRepository<PaymentMethod> repository )
     {
-        this.repository = new PaymentMethodRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override

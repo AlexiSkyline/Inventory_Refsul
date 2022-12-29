@@ -1,11 +1,11 @@
 package com.refsul.inventory_refsul.services.implementService;
 
 import com.refsul.inventory_refsul.models.Brand;
-import com.refsul.inventory_refsul.repository.implementsRepository.BrandRepositoryImpl;
 import com.refsul.inventory_refsul.repository. interfaces.CrudRepository;
 import com.refsul.inventory_refsul.services. interfaces.BrandService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +13,12 @@ import java.util.Optional;
 
 public class BrandServiceImpl implements BrandService
 {
-    private CrudRepository repository;
+    private final CrudRepository<Brand> repository;
 
-    public BrandServiceImpl()
+    @Inject
+    public BrandServiceImpl( CrudRepository<Brand> crudRepository )
     {
-        this.repository = new BrandRepositoryImpl();
+        this.repository = crudRepository;
     }
 
     @Override

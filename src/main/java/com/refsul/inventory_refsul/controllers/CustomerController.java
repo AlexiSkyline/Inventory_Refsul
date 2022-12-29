@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.services.implementService.PersonalInformation
 import com.refsul.inventory_refsul.services.interfaces.CustomerService;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +16,11 @@ public class CustomerController
     private CustomerService customerService;
     private PersonalInformationService informationService;
 
-    public CustomerController()
+    @Inject
+    public CustomerController( CustomerService customerService, PersonalInformationService personalInformationService )
     {
-        this.customerService = new CustomerServiceImpl();
-        this.informationService = new PersonalInformationServiceImpl();
+        this.customerService = customerService;
+        this.informationService = personalInformationService;
     }
 
     public boolean createCustomer( Customer customer )

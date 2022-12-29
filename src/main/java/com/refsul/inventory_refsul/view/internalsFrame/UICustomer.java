@@ -9,23 +9,25 @@ import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValid
 import com.refsul.inventory_refsul.view.validators.validationOptions.NumberValidator;
 import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UICustomer extends javax.swing.JInternalFrame {
-    CustomerController customerController;
-    DefaultTableModel tableModel;
-    Customer customer;
-    PersonalInformation personalInformation;
+    private final CustomerController customerController;
+    private DefaultTableModel tableModel;
+    private final Customer customer;
+    private final PersonalInformation personalInformation;
     private int idCustomer;
 
-    public UICustomer() throws SQLException {
+    @Inject
+    public UICustomer( CustomerController customerController ) {
         initComponents();
         this.setResizable( false );
 
-        this.customerController = new CustomerController();
+        this.customerController = customerController;
         this.tableModel = new DefaultTableModel();
         this.customer = new Customer();
         this.personalInformation = new PersonalInformation();
@@ -462,9 +464,14 @@ public class UICustomer extends javax.swing.JInternalFrame {
         }
     }
 
-    public void showListCustomer() throws SQLException
+    public void showListCustomer()
     {
-        List<Customer> listCustomers = this.customerController.getCustomers();
+        List<Customer> listCustomers = null;
+        try {
+            listCustomers = this.customerController.getCustomers();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         this.tableModel = ( DefaultTableModel ) this.tableCustomer.getModel();
 
         for( Customer customer : listCustomers )

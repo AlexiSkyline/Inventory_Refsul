@@ -34,14 +34,14 @@ public class UIProduct extends javax.swing.JInternalFrame {
     private int idBrand;
     private int idProvider;
 
-    public UIProduct() throws SQLException {
+    public UIProduct() {
         initComponents();
         this.setResizable( false );
 
         this.productController = new ProductController();
         this.unitMeasurementController = new UnitMeasurementController();
-        this.brandController = new BrandController();
-        this.providerController = new ProviderController();
+        //this.brandController = brandController;
+        //this.providerController = new ProviderController();
         this.tableModel = new DefaultTableModel();
         this.product = new Product();
 
@@ -52,10 +52,14 @@ public class UIProduct extends javax.swing.JInternalFrame {
         this.idProduct = 0;
         
         this.cleanListProducts();
-        this.showListProduct();
-        this.showUnitMeasurementInCombobox();
-        this.showBrandInCombobox();
-        this.showProvidersInCombobox();
+        try {
+            this.showListProduct();
+            this.showUnitMeasurementInCombobox();
+            this.showBrandInCombobox();
+            this.showProvidersInCombobox();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         this.disableButtonUpdateAndDelete();
     }

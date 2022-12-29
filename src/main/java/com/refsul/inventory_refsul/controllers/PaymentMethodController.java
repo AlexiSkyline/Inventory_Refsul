@@ -1,20 +1,21 @@
 package com.refsul.inventory_refsul.controllers;
 
 import com.refsul.inventory_refsul.models.PaymentMethod;
-import com.refsul.inventory_refsul.services.implementService.PaymentMethodServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PaymentMethodService;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class PaymentMethodController
 {
-    private PaymentMethodService service;
+    private final PaymentMethodService service;
 
-    public PaymentMethodController()
+    @Inject
+    public PaymentMethodController( PaymentMethodService paymentMethodService )
     {
-        this.service = new PaymentMethodServiceImpl();
+        this.service = paymentMethodService;
     }
 
     public boolean createPaymentMethod( PaymentMethod paymentMethod )

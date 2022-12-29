@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.services.interfaces.CustomerService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +14,12 @@ import java.util.Optional;
 
 public class CustomerServiceImpl implements CustomerService
 {
-    private CrudRepository repository;
+    private final CrudRepository<Customer> repository;
 
-    public CustomerServiceImpl()
+    @Inject
+    public CustomerServiceImpl( CrudRepository<Customer> repository )
     {
-        this.repository = new CustomerRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override

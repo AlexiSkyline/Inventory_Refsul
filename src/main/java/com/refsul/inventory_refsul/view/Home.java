@@ -1,5 +1,6 @@
 package com.refsul.inventory_refsul.view;
 
+import com.refsul.inventory_refsul.config.components.*;
 import com.refsul.inventory_refsul.view.internalsFrame.*;
 
 import java.awt.Dimension;
@@ -282,32 +283,33 @@ public class Home extends javax.swing.JFrame {
 
     private void ItemSellersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UISeller seller = new UISeller();
-        this.showWindows( seller );
+        SellerComponent sellerComponent = DaggerSellerComponent.create();
+        this.showWindows( sellerComponent.buildUISeller() );
     }
 
     private void ItemProvidersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UIProvider provider = new UIProvider();
+        ProviderComponent providerComponent = DaggerProviderComponent.create();
+        UIProvider provider = providerComponent.buildUIProvider();
         this.showWindows( provider );
     }
 
     private void ItemCustomersActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UICustomer customer = new UICustomer();
-        this.showWindows( customer );
+        CustomerComponent customerComponent = DaggerCustomerComponent.create();
+        this.showWindows( customerComponent.buildUISeller() );
     }
 
     private void ItemProductsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UIProduct product = new UIProduct();
-        this.showWindows( product );
+        //UIProduct product = new UIProduct();
+        //this.showWindows( product );
     }
 
     private void ItemPaymentMethodsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UIPaymentMethod paymentMethod = new UIPaymentMethod();
-        this.showWindows( paymentMethod );
+        PaymentMethodComponent paymentMethodComponent = DaggerPaymentMethodComponent.create();
+        this.showWindows( paymentMethodComponent.buildUIPaymentMethod() );
     }
 
     private void ItemUnitsMeasurementsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
@@ -318,7 +320,8 @@ public class Home extends javax.swing.JFrame {
 
     private void ItemBrandActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UIBrand brand = new UIBrand();
+        BrandComponent brandComponent = DaggerBrandComponent.create();
+        UIBrand brand = brandComponent.buildUIBrand();
         this.showWindows( brand );
     }
 

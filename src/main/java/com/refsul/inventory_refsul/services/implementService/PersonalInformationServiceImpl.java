@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.repository.interfaces.PersonalInformationRepo
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +14,12 @@ import java.util.Optional;
 
 public class PersonalInformationServiceImpl implements PersonalInformationService
 {
-    private PersonalInformationRepository repository;
+    private final PersonalInformationRepository repository;
 
-    public PersonalInformationServiceImpl()
+    @Inject
+    public PersonalInformationServiceImpl( PersonalInformationRepository repository )
     {
-        this.repository = new PersonalInfoRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override

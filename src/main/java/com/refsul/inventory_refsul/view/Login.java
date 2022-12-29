@@ -1,5 +1,7 @@
 package com.refsul.inventory_refsul.view;
 
+import com.refsul.inventory_refsul.config.components.DaggerSellerComponent;
+import com.refsul.inventory_refsul.config.components.SellerComponent;
 import com.refsul.inventory_refsul.controllers.SellerController;
 import com.refsul.inventory_refsul.view.validators.ItemForm;
 import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValidator;
@@ -16,7 +18,8 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo( null );
         this.setResizable( false );
 
-        this.sellerController = new SellerController();
+        SellerComponent sellerComponent = DaggerSellerComponent.create();
+        this.sellerController = sellerComponent.buildSellerController();
         this.jTextUserName.setText( "AlexiSkyline" );
         this.jTextPassword.setText( "123456" );
     }

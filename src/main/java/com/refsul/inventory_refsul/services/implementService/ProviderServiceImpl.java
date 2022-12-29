@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.services.interfaces.ProviderService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +14,12 @@ import java.util.Optional;
 
 public class ProviderServiceImpl implements ProviderService
 {
-    private CrudRepository repository;
+    private final CrudRepository<Provider> repository;
 
-    public ProviderServiceImpl()
+    @Inject
+    public ProviderServiceImpl( CrudRepository<Provider> repository )
     {
-        this.repository = new ProviderRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override

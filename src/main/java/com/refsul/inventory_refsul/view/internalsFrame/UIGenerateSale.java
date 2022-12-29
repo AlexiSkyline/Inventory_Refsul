@@ -5,9 +5,10 @@
  */
 package com.refsul.inventory_refsul.view.internalsFrame;
 
+import com.refsul.inventory_refsul.config.components.CustomerComponent;
+import com.refsul.inventory_refsul.config.components.DaggerCustomerComponent;
 import com.refsul.inventory_refsul.controllers.*;
 import com.refsul.inventory_refsul.models.*;
-import com.refsul.inventory_refsul.repository.interfaces.ProductRepository;
 import com.refsul.inventory_refsul.view.Home;
 import com.refsul.inventory_refsul.view.validators.ItemForm;
 import com.refsul.inventory_refsul.view.validators.validationOptions.NumberValidator;
@@ -21,11 +22,11 @@ import java.util.*;
 public class UIGenerateSale extends javax.swing.JInternalFrame {
     private Product product;
 
-    private SalesController salesController;
-    private CustomerController customerController;
-    private SellerController sellerController;
-    private ProductController productController;
-    private PaymentMethodController paymentMethodController;
+    private final SalesController salesController;
+    private final CustomerController customerController = null;
+    private final SellerController sellerController = null;
+    private final ProductController productController;
+    private final PaymentMethodController paymentMethodController = null;
     private List<PaymentMethod> paymentMethodList;
 
     private int idCustomer;
@@ -39,20 +40,24 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
     private int quantityProduct;
     private static int lastIdItem;
 
-    public UIGenerateSale() throws SQLException {
+    public UIGenerateSale() {
         initComponents();
         this.setResizable( false );
 
         this.salesController = new SalesController();
-        this.customerController = new CustomerController();
-        this.sellerController = new SellerController();
+        //this.customerController = new CustomerController();
+        //this.sellerController = new SellerController();
         this.productController = new ProductController();
-        this.paymentMethodController = new PaymentMethodController();
+        //this.paymentMethodController = new PaymentMethodController();
         this.paymentMethodList = new ArrayList<>();
 
         this.getDateFromNow();
-        this.generateFolio();
-        this.showPaymentMethodList();
+        try {
+            this.generateFolio();
+            this.showPaymentMethodList();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         this.idCustomer = 0;
         this.idSeller = 0;
@@ -60,7 +65,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         this.idPaymentMethod = 0;
 
         this.tableShoppingCart = new DefaultTableModel();
-        this.lastIdItem = 0;
+        lastIdItem = 0;
     }
     
     /**
@@ -674,9 +679,10 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
                 int confirmDialog = JOptionPane.showConfirmDialog(this, "El cliente no Existe, Desea Registrarlo?", "Error al Buscar", JOptionPane.WARNING_MESSAGE );
                 if( confirmDialog == 0 )
                 {
-                    UICustomer customer = new UICustomer();
-                    Home.showWindows( customer );
-                    customer.setVisible( true );
+//                    CustomerComponent customerComponent = DaggerCustomerComponent.create();
+//                    UICustomer customer = customerComponent.buildUISeller();
+//                    Home.showWindows( customer );
+//                    customer.setVisible( true );
                 }
             }
         }
@@ -687,7 +693,8 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         String idSeller = this.jTextIdSeller.getText();
 
         if( this.isValidSellerInput() ) {
-            Optional<Seller> findSeller = this.sellerController.getSellerById( Integer.parseInt( idSeller ) );
+//            Optional<Seller> findSeller = this.sellerController.getSellerById( Integer.parseInt( idSeller ) );
+            Optional<Seller> findSeller = null;
             if( findSeller.isPresent() ){
                 this.jTextSellerName.setText( findSeller.get().getPersonalInformation().getName() + " " + findSeller.get().getPersonalInformation().getLastName() );
                 this.idSeller = findSeller.get().getIdSeller();
@@ -696,9 +703,9 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
                 int confirmDialog = JOptionPane.showConfirmDialog(this, "El Vendedor no Existe, Desea Registrarlo?", "Error al Buscar", JOptionPane.WARNING_MESSAGE );
                 if( confirmDialog == 0 )
                 {
-                    UISeller seller = new UISeller();
-                    Home.showWindows( seller );
-                    seller.setVisible( true );
+                    //UISeller seller = new UISeller();
+                    //Home.showWindows( seller );
+                    //seller.setVisible( true );
                 }
             }
         }

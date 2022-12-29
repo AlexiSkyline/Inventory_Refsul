@@ -6,22 +6,24 @@ import com.refsul.inventory_refsul.view.validators.ItemForm;
 import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValidator;
 import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UIPaymentMethod extends javax.swing.JInternalFrame {
-    PaymentMethodController paymentMethodController;
-    DefaultTableModel tableModel;
-    PaymentMethod paymentMethod;
+    private final PaymentMethodController paymentMethodController;
+    private DefaultTableModel tableModel;
+    private final PaymentMethod paymentMethod;
     private int idPaymentMethod;
 
-    public UIPaymentMethod() throws SQLException {
+    @Inject
+    public UIPaymentMethod( PaymentMethodController paymentMethodController ) {
         initComponents();
         this.setResizable( false );
 
-        this.paymentMethodController = new PaymentMethodController();
+        this.paymentMethodController = paymentMethodController;
         this.tableModel = new DefaultTableModel();
         this.paymentMethod = new PaymentMethod();
         this.idPaymentMethod = 0;
@@ -347,9 +349,14 @@ public class UIPaymentMethod extends javax.swing.JInternalFrame {
         }
     }
 
-    public void showListPaymentMethods() throws SQLException
+    public void showListPaymentMethods()
     {
-        List<PaymentMethod> listPaymentMethods = this.paymentMethodController.getPaymentMethods();
+        List<PaymentMethod> listPaymentMethods = null;
+        try {
+            listPaymentMethods = this.paymentMethodController.getPaymentMethods();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         this.tableModel = ( DefaultTableModel ) this.tablePaymentMethod.getModel();
 
         for( PaymentMethod paymentMethod : listPaymentMethods )

@@ -9,23 +9,25 @@ import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValid
 import com.refsul.inventory_refsul.view.validators.validationOptions.NumberValidator;
 import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UIProvider extends javax.swing.JInternalFrame {
-    ProviderController providerController;
-    DefaultTableModel tableModel;
-    Provider provider;
-    PersonalInformation personalInformation;
+    private final ProviderController providerController;
+    private DefaultTableModel tableModel;
+    private final Provider provider;
+    private final PersonalInformation personalInformation;
     private int idProvider;
 
-    public UIProvider() throws SQLException {
+    @Inject
+    public UIProvider( ProviderController providerController ) {
         initComponents();
         this.setResizable( false );
 
-        this.providerController = new ProviderController();
+        this.providerController = providerController;
         this.tableModel = new DefaultTableModel();
         this.provider = new Provider();
         this.personalInformation = new PersonalInformation();
@@ -461,9 +463,14 @@ public class UIProvider extends javax.swing.JInternalFrame {
         }
     }
 
-    public void showListProviders() throws SQLException
+    public void showListProviders()
     {
-        List<Provider> listProviders = this.providerController.getProviders();
+        List<Provider> listProviders = null;
+        try {
+            listProviders = this.providerController.getProviders();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         this.tableModel = ( DefaultTableModel ) this.tableProvider.getModel();
 
         for( Provider provider : listProviders )

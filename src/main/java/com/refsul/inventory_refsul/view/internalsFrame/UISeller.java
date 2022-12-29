@@ -9,23 +9,25 @@ import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValid
 import com.refsul.inventory_refsul.view.validators.validationOptions.NumberValidator;
 import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UISeller extends javax.swing.JInternalFrame {
-    SellerController sellerController;
-    DefaultTableModel tableModel;
-    Seller seller;
-    PersonalInformation personalInformation;
+    private final SellerController sellerController;
+    private DefaultTableModel tableModel;
+    private final Seller seller;
+    private final PersonalInformation personalInformation;
     private int idSeller;
 
-    public UISeller() throws SQLException {
+    @Inject
+    public UISeller( SellerController sellerController ) {
         initComponents();
         this.setResizable( false );
 
-        this.sellerController = new SellerController();
+        this.sellerController = sellerController;
         this.tableModel = new DefaultTableModel();
         this.seller = new Seller();
         this.personalInformation = new PersonalInformation();
@@ -502,9 +504,14 @@ public class UISeller extends javax.swing.JInternalFrame {
         }
     }
 
-    public void showListSellers() throws SQLException
+    public void showListSellers()
     {
-        List<Seller> listSellers = this.sellerController.getSellers();
+        List<Seller> listSellers = null;
+        try {
+            listSellers = this.sellerController.getSellers();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         this.tableModel = ( DefaultTableModel ) this.tableSeller.getModel();
 
         for( Seller seller : listSellers )

@@ -1,20 +1,21 @@
 package com.refsul.inventory_refsul.controllers;
 
 import com.refsul.inventory_refsul.models.Brand;
-import com.refsul.inventory_refsul.services.implementService.BrandServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.BrandService;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class BrandController
 {
-    private BrandService service;
+    private final BrandService service;
 
-    public BrandController()
+    @Inject
+    public BrandController( BrandService service )
     {
-        this.service = new BrandServiceImpl();
+        this.service = service;
     }
 
     public boolean createBrand( Brand brand )

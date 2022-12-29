@@ -6,28 +6,34 @@ import com.refsul.inventory_refsul.view.validators.ItemForm;
 import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValidator;
 import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UIBrand extends javax.swing.JInternalFrame {
-    BrandController brandController;
-    DefaultTableModel tableModel;
-    Brand brand;
+    private final BrandController brandController;
+    private DefaultTableModel tableModel;
+    private final Brand brand;
     private int idBrand;
 
-    public UIBrand() throws SQLException {
+    @Inject
+    public UIBrand( BrandController brandController ) {
         initComponents();
         this.setResizable( false );
 
-        this.brandController = new BrandController();
+        this.brandController = brandController;
         this.tableModel = new DefaultTableModel();
         this.brand = new Brand();
         this.idBrand = 0;
         
         this.cleanListBrands();
-        this.showListBrands();
+        try {
+            this.showListBrands();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         this.disableButtonUpdateAndDelete();
     }

@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.services.interfaces.SellerService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 import com.refsul.inventory_refsul.models.Seller;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +14,12 @@ import java.util.Optional;
 
 public class SellerServiceImpl implements SellerService
 {
-    private SellerRepository repository;
+    private final SellerRepository repository;
 
-    public SellerServiceImpl()
+    @Inject
+    public SellerServiceImpl( SellerRepository repository )
     {
-        this.repository = new SellerRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override

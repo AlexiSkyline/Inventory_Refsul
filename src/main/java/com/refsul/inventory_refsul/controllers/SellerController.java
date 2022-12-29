@@ -1,25 +1,24 @@
 package com.refsul.inventory_refsul.controllers;
 
-import com.refsul.inventory_refsul.models.Customer;
-import com.refsul.inventory_refsul.services.implementService.PersonalInformationServiceImpl;
-import com.refsul.inventory_refsul.services.implementService.SellerServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.services.interfaces.SellerService;
 import com.refsul.inventory_refsul.models.Seller;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class SellerController
 {
-    private SellerService sellerService;
-    private PersonalInformationService informationService;
+    private final SellerService sellerService;
+    private final PersonalInformationService informationService;
 
-    public SellerController()
+    @Inject
+    public SellerController( SellerService sellerService, PersonalInformationService personalInformationService )
     {
-        this.sellerService = new SellerServiceImpl();
-        this.informationService = new PersonalInformationServiceImpl();
+        this.sellerService = sellerService;
+        this.informationService = personalInformationService;
     }
 
     public boolean login( String userName, String password ) throws SQLException
@@ -48,7 +47,7 @@ public class SellerController
 
     public List<Seller> getSellers() throws SQLException
     {
-        return ( List<Seller> ) this.sellerService.findAll();
+        return this.sellerService.findAll();
     }
 
     public Optional<Seller> getSellerById(int id ) throws SQLException
