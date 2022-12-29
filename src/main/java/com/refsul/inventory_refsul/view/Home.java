@@ -14,7 +14,7 @@ public class Home extends javax.swing.JFrame {
         this.setResizable( false );
     }
    
-    public static void showWindows(JInternalFrame child ) {
+    public void showWindows(JInternalFrame child ) {
         jDesktopPaneHome.add( child );
         Dimension size = child.getSize();
         Dimension dimension = jDesktopPaneHome.getSize();

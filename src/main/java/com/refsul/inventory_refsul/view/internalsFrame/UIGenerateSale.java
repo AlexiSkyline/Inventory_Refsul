@@ -22,7 +22,7 @@ import java.util.*;
 public class UIGenerateSale extends javax.swing.JInternalFrame {
     private Product product;
 
-    private final SalesController salesController;
+    private final SalesController salesController = null;
     private final CustomerController customerController = null;
     private final SellerController sellerController = null;
     private final ProductController productController;
@@ -44,7 +44,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         initComponents();
         this.setResizable( false );
 
-        this.salesController = new SalesController();
+        //this.salesController = new SalesController();
         //this.customerController = new CustomerController();
         //this.sellerController = new SellerController();
         this.productController = new ProductController();
@@ -728,9 +728,9 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
                 int confirmDialog = JOptionPane.showConfirmDialog(this, "El Producto no Existe, Desea Registrarlo?", "Error al Buscar", JOptionPane.WARNING_MESSAGE );
                 if( confirmDialog == 0 )
                 {
-                    UIProduct seller = new UIProduct();
-                    Home.showWindows( seller );
-                    seller.setVisible( true );
+//                    UIProduct seller = new UIProduct();
+//                    Home.showWindows( seller );
+//                    seller.setVisible( true );
                 }
             }
         }

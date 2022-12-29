@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.repository.interfaces.SalesRepository;
 import com.refsul.inventory_refsul.services.interfaces.SaleService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,9 +16,10 @@ public class SaleServiceImpl implements SaleService
 {
     private SalesRepository repository;
 
-    public SaleServiceImpl()
+    @Inject
+    public SaleServiceImpl( SalesRepository repository )
     {
-        this.repository = new SalesRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override
