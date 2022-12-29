@@ -13,6 +13,7 @@ import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValid
 import com.refsul.inventory_refsul.view.validators.validationOptions.NumberValidator;
 import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
@@ -20,28 +21,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UIProduct extends javax.swing.JInternalFrame {
-    ProductController productController;
-    UnitMeasurementController unitMeasurementController;
-    BrandController brandController;
-    ProviderController providerController;
-    DefaultTableModel tableModel;
-    Product product;
-    List<Provider> providers;
-    List<Brand> brands;
-    List<UnitMeasurement> unitMeasurements;
+    private final ProductController productController;
+    private final UnitMeasurementController unitMeasurementController;
+    private final BrandController brandController;
+    private final ProviderController providerController;
+    private DefaultTableModel tableModel;
+    private final Product product;
+    private List<Provider> providers;
+    private List<Brand> brands;
+    private List<UnitMeasurement> unitMeasurements;
     private int idProduct;
     private int idUnitMeasurement;
     private int idBrand;
     private int idProvider;
 
-    public UIProduct() {
+    @Inject
+    public UIProduct( ProductController productController, UnitMeasurementController unitMeasurementController,
+                      BrandController brandController, ProviderController providerController ) {
         initComponents();
         this.setResizable( false );
 
-        this.productController = new ProductController();
-        //this.unitMeasurementController = new UnitMeasurementController();
-        //this.brandController = brandController;
-        //this.providerController = new ProviderController();
+        this.productController = productController;
+        this.unitMeasurementController = unitMeasurementController;
+        this.brandController = brandController;
+        this.providerController = providerController;
         this.tableModel = new DefaultTableModel();
         this.product = new Product();
 

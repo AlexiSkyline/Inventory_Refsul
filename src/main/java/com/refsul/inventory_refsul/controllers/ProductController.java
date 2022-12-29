@@ -5,17 +5,19 @@ import com.refsul.inventory_refsul.models.Seller;
 import com.refsul.inventory_refsul.services.implementService.ProductServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.ProductService;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class ProductController
 {
-    private ProductService service;
+    private final ProductService service;
 
-    public ProductController()
+    @Inject
+    public ProductController( ProductService service )
     {
-        this.service = new ProductServiceImpl();
+        this.service = service;
     }
 
     public boolean createProduct( Product product )

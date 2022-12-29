@@ -6,6 +6,7 @@ import com.refsul.inventory_refsul.repository.interfaces.ProductRepository;
 import com.refsul.inventory_refsul.services.interfaces.ProductService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
 
+import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +14,12 @@ import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService
 {
-    private ProductRepository repository;
+    private final ProductRepository repository;
 
-    public ProductServiceImpl()
+    @Inject
+    public ProductServiceImpl( ProductRepository repository )
     {
-        this.repository = new ProductRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override

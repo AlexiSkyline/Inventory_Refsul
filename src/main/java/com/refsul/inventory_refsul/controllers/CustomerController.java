@@ -13,8 +13,8 @@ import java.util.Optional;
 
 public class CustomerController
 {
-    private CustomerService customerService;
-    private PersonalInformationService informationService;
+    private final CustomerService customerService;
+    private final PersonalInformationService informationService;
 
     @Inject
     public CustomerController( CustomerService customerService, PersonalInformationService personalInformationService )

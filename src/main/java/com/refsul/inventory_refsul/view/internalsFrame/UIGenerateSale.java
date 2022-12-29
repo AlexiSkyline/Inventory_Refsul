@@ -25,7 +25,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
     private final SalesController salesController = null;
     private final CustomerController customerController = null;
     private final SellerController sellerController = null;
-    private final ProductController productController;
+    private final ProductController productController = null;
     private final PaymentMethodController paymentMethodController = null;
     private List<PaymentMethod> paymentMethodList;
 
@@ -47,7 +47,7 @@ public class UIGenerateSale extends javax.swing.JInternalFrame {
         //this.salesController = new SalesController();
         //this.customerController = new CustomerController();
         //this.sellerController = new SellerController();
-        this.productController = new ProductController();
+        //this.productController = new ProductController();
         //this.paymentMethodController = new PaymentMethodController();
         this.paymentMethodList = new ArrayList<>();
 

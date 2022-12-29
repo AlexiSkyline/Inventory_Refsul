@@ -302,8 +302,8 @@ public class Home extends javax.swing.JFrame {
 
     private void ItemProductsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        //UIProduct product = new UIProduct();
-        //this.showWindows( product );
+        ProductComponent productComponent = DaggerProductComponent.create();
+        this.showWindows( productComponent.buildUIProduct() );
     }
 
     private void ItemPaymentMethodsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
