@@ -6,22 +6,24 @@ import com.refsul.inventory_refsul.view.validators.ItemForm;
 import com.refsul.inventory_refsul.view.validators.validationOptions.LengthValidator;
 import com.refsul.inventory_refsul.view.validators.validationOptions.RequiredValidator;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UIUnitMeasurement extends javax.swing.JInternalFrame {
-    UnitMeasurementController unitMeasurementController;
-    DefaultTableModel tableModel;
-    UnitMeasurement unitMeasurement;
+    private final UnitMeasurementController unitMeasurementController;
+    private DefaultTableModel tableModel;
+    private final UnitMeasurement unitMeasurement;
     private int idUnitMeasurement;
 
-    public UIUnitMeasurement() throws SQLException {
+    @Inject
+    public UIUnitMeasurement( UnitMeasurementController unitMeasurementController ) {
         initComponents();
         this.setResizable( false );
 
-        this.unitMeasurementController = new UnitMeasurementController();
+        this.unitMeasurementController = unitMeasurementController;
         this.tableModel = new DefaultTableModel();
         this.unitMeasurement = new UnitMeasurement();
         this.idUnitMeasurement = 0;
@@ -347,9 +349,14 @@ public class UIUnitMeasurement extends javax.swing.JInternalFrame {
         }
     }
 
-    public void showListUnitMeasurements() throws SQLException
+    public void showListUnitMeasurements()
     {
-        List<UnitMeasurement> listUnitMeasurements = this.unitMeasurementController.getUnitMeasurements();
+        List<UnitMeasurement> listUnitMeasurements = null;
+        try {
+            listUnitMeasurements = this.unitMeasurementController.getUnitMeasurements();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         this.tableModel = ( DefaultTableModel ) this.tableUnitMeasurement.getModel();
 
         for( UnitMeasurement unitMeasurement : listUnitMeasurements )

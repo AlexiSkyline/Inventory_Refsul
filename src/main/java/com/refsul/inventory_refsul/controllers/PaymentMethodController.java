@@ -13,9 +13,9 @@ public class PaymentMethodController
     private final PaymentMethodService service;
 
     @Inject
-    public PaymentMethodController( PaymentMethodService paymentMethodService )
+    public PaymentMethodController( PaymentMethodService service )
     {
-        this.service = paymentMethodService;
+        this.service = service;
     }
 
     public boolean createPaymentMethod( PaymentMethod paymentMethod )

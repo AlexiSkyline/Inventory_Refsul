@@ -4,17 +4,19 @@ import com.refsul.inventory_refsul.models.UnitMeasurement;
 import com.refsul.inventory_refsul.services.implementService.UnitMeasurementServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.UnitMeasurementService;
 
+import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class UnitMeasurementController
 {
-    private UnitMeasurementService service;
+    private final UnitMeasurementService service;
 
-    public UnitMeasurementController()
+    @Inject
+    public UnitMeasurementController( UnitMeasurementService service )
     {
-        this.service = new UnitMeasurementServiceImpl();
+        this.service = service;
     }
 
     public boolean createUnitMeasurement( UnitMeasurement unitMeasurement )

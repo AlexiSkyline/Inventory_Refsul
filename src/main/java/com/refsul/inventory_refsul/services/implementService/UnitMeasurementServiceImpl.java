@@ -1,7 +1,6 @@
 package com.refsul.inventory_refsul.services.implementService;
 
 import com.refsul.inventory_refsul.models.UnitMeasurement;
-import com.refsul.inventory_refsul.repository.implementsRepository.UnitMeasurementRepositoryImpl;
 import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.services.interfaces.UnitMeasurementService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
@@ -13,11 +12,11 @@ import java.util.Optional;
 
 public class UnitMeasurementServiceImpl implements UnitMeasurementService
 {
-    private CrudRepository repository;
+    private final CrudRepository<UnitMeasurement> repository;
 
-    public UnitMeasurementServiceImpl()
+    public UnitMeasurementServiceImpl(CrudRepository<UnitMeasurement> repository)
     {
-        this.repository = new UnitMeasurementRepositoryImpl();
+        this.repository = repository;
     }
 
     @Override

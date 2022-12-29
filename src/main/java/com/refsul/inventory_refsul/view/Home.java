@@ -314,8 +314,8 @@ public class Home extends javax.swing.JFrame {
 
     private void ItemUnitsMeasurementsActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException
     {
-        UIUnitMeasurement unitMeasurement = new UIUnitMeasurement();
-        this.showWindows( unitMeasurement );
+        UnitMeasurementComponent unitMeasurementComponent = DaggerUnitMeasurementComponent.create();
+        this.showWindows( unitMeasurementComponent.buildUIUnitMeasurement() );
     }
 
     private void ItemBrandActionPerformed( java.awt.event.ActionEvent evt ) throws SQLException

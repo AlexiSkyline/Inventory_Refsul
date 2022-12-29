@@ -39,7 +39,7 @@ public class UIProduct extends javax.swing.JInternalFrame {
         this.setResizable( false );
 
         this.productController = new ProductController();
-        this.unitMeasurementController = new UnitMeasurementController();
+        //this.unitMeasurementController = new UnitMeasurementController();
         //this.brandController = brandController;
         //this.providerController = new ProviderController();
         this.tableModel = new DefaultTableModel();
