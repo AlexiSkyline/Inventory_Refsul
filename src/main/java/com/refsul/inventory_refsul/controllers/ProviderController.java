@@ -1,7 +1,6 @@
 package com.refsul.inventory_refsul.controllers;
 
 import com.refsul.inventory_refsul.models.Provider;
-import com.refsul.inventory_refsul.services.implementService.PersonalInformationServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.services.interfaces.ProviderService;
 

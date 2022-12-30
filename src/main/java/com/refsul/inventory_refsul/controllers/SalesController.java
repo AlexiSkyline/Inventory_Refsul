@@ -1,7 +1,6 @@
 package com.refsul.inventory_refsul.controllers;
 
 import com.refsul.inventory_refsul.models.Sales;
-import com.refsul.inventory_refsul.services.implementService.SaleServiceImpl;
 import com.refsul.inventory_refsul.services.interfaces.SaleService;
 
 import javax.inject.Inject;

@@ -1,7 +1,6 @@
 package com.refsul.inventory_refsul.services.implementService;
 
 import com.refsul.inventory_refsul.models.Customer;
-import com.refsul.inventory_refsul.repository.implementsRepository.CustomerRepositoryImpl;
 import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.services.interfaces.CustomerService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;

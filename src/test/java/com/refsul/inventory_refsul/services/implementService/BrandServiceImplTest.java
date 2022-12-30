@@ -2,6 +2,7 @@ package com.refsul.inventory_refsul.services.implementService;
 
 import com.refsul.inventory_refsul.models.Brand;
 import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
+import com.refsul.inventory_refsul.services.implementService.data.BrandData;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

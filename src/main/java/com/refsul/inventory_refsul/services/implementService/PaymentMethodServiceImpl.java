@@ -1,7 +1,6 @@
 package com.refsul.inventory_refsul.services.implementService;
 
 import com.refsul.inventory_refsul.models.PaymentMethod;
-import com.refsul.inventory_refsul.repository.implementsRepository.PaymentMethodRepositoryImpl;
 import com.refsul.inventory_refsul.repository.interfaces.CrudRepository;
 import com.refsul.inventory_refsul.services.interfaces.PaymentMethodService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;

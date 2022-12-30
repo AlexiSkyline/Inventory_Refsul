@@ -1,7 +1,6 @@
 package com.refsul.inventory_refsul.services.implementService;
 
 import com.refsul.inventory_refsul.models.PersonalInformation;
-import com.refsul.inventory_refsul.repository.implementsRepository.PersonalInfoRepositoryImpl;
 import com.refsul.inventory_refsul.repository.interfaces.PersonalInformationRepository;
 import com.refsul.inventory_refsul.services.interfaces.PersonalInformationService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;

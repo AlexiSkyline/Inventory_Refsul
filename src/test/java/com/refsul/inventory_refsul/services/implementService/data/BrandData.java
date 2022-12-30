@@ -1,4 +1,4 @@
-package com.refsul.inventory_refsul.services.implementService;
+package com.refsul.inventory_refsul.services.implementService.data;
 
 import com.refsul.inventory_refsul.models.Brand;
 

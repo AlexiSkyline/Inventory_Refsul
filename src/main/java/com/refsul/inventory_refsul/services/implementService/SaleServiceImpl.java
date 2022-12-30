@@ -1,7 +1,6 @@
 package com.refsul.inventory_refsul.services.implementService;
 
 import com.refsul.inventory_refsul.models.Sales;
-import com.refsul.inventory_refsul.repository.implementsRepository.SalesRepositoryImpl;
 import com.refsul.inventory_refsul.repository.interfaces.SalesRepository;
 import com.refsul.inventory_refsul.services.interfaces.SaleService;
 import com.refsul.inventory_refsul.utils.DataBaseConnection;
